@@ -1,11 +1,15 @@
 import '../assets/styles/login.css'
 
-function Login() {
+export default function Login() {
   return (
-    <>
-      <h1>Login Page</h1>
-    </>
+    <div className="login-container">
+      <div className="login-form-container">
+        <h2>LOGIN</h2>
+        <form className="login-form" action="">
+          <input type="text" />
+          <input type="text" />
+        </form>
+      </div>
+    </div>
   )
 }
-
-export default Login

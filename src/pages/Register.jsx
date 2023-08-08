@@ -1,11 +1,16 @@
 import '../assets/styles/login.css'
 
-function Register() {
+export default function Register() {
   return (
-    <>
-      <h1>Register Page</h1>
-    </>
+    <div className="register-container">
+      <div className="register-form-container">
+      <h2>REGISTER</h2>
+        <form action="">
+          <label>
+            <input type="text" />
+          </label>
+        </form>
+      </div>
+    </div>
   )
 }
-
-export default Register
