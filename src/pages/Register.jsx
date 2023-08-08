@@ -1,4 +1,4 @@
-import '../App.css'
+import '../assets/styles/login.css'
 
 function Register() {
   return (
