@@ -1,3 +1,4 @@
+import React from 'react';
 import '../assets/styles/login.css'
 
 export default function Register() {
