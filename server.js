@@ -1,5 +1,8 @@
 const express = require('express');
 const path = require('path');
+const mongoose = require('mongoose');
+
+console.log('Mongoose version : ', mongoose.version);
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -8,7 +11,7 @@ const port = process.env.PORT || 3000;
 app.use(express.static(path.join(__dirname, 'dist')));
 
 // Route to serve your React app
-app.get('/', (req, res) => {
+app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 

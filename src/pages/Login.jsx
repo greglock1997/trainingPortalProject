@@ -7,8 +7,8 @@ export default function Login() {
       <div className="login-form-container">
         <h2>LOGIN</h2>
         <form className="login-form" action="">
-          <input type="text" />
-          <input type="text" />
+          <input type="text" placeholder="Username"/>
+          <input type="text" placeholder="Password"/>
         </form>
       </div>
     </div>
