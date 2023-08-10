@@ -21,6 +21,8 @@ app.post('/register', (req, res) => {
     console.log("Data")
     const formData = req.body;
     console.log(formData);
+    // Return status message to ensure registration is valid
+    res.status(200).send('Registration successful');
 });
 
 // Route to serve your React app

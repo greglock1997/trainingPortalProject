@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+import { Navigate } from 'react-router-dom';
 import Message from '../components/Message.jsx'
 import '../assets/styles/login.css'
 
@@ -11,6 +12,9 @@ export default function Register() {
   const deleteMessage = () => {
     setMessage('');
   }
+
+  // Set valid status
+  const [isRegistered, setIsRegistered] = useState(false);
 
   // Set default state for username and password
   const [username, setUsername] = useState('');
@@ -36,27 +40,35 @@ export default function Register() {
   }
 
   const handleSubmit = async (event) => {
+    // Prevents page refresh
     event.preventDefault();
 
-    if ((username == confirmUsername) && (password == confirmPassword)) {
+    if ((username === confirmUsername) && (password === confirmPassword)) {
       try {
         const response = await fetch('/register', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({username, password})
-        })
+          body: JSON.stringify({username, password}),
+        });
+        if (response.ok) {
+          setIsRegistered(true);
+        }
       } catch (error) {
         console.log('Error submitting form', error)
       }
-    } else if (username == confirmUsername) {
+    } else if (username === confirmUsername) {
       setMessage('Passwords do not match')
-    } else if (password == confirmPassword) {
+    } else if (password === confirmPassword) {
       setMessage('Usernames do not match')
     } else {
       setMessage('Usernames and passwords do not match')
     }
+  };
+
+  if (isRegistered) {
+    return <Navigate to="/login" />
   }
 
   return (

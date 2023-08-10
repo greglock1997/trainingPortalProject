@@ -138,8 +138,20 @@ header a:hover {
 }
 
 .message-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
     background-color: #2E549E;
     color: #FFFFFF;
     padding: 20px;
     margin-bottom: 40px;
+    border-radius: 10px;
+}
+
+.message-container button {
+    margin-left: 20px;
+    color: #FFFFFF;
+    background-color: #2E549E;
+    font-size: 20px;
 }

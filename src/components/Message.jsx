@@ -8,7 +8,7 @@ export default function Message(props) {
     return (
         <div className="message-container" >
             <h3>{props.message}</h3>
-            <button onClick={handleClick}>&#10539;</button>
+            <button onClick={handleClick}>&#10005;</button>
         </div>
     )
 }
