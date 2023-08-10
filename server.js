@@ -1,21 +1,23 @@
 // Install required packages
 const express = require('express');
 const path = require('path');
-const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
 // Set express to app for quick use
 const app = express();
 const port = process.env.PORT || 3000;
 
+// Mongoose Database
+const database = "./database.js"
+
 // Inlcude body parser
-app.use(bodyParser.json());
+app.use(express.json());
 
 // Serve static files from the Vite build output
 app.use(express.static(path.join(__dirname, 'dist')));
 
 // Test use of api for submitting form data
-app.post('/api/submit-form', (req, res) => {
+app.post('/register', (req, res) => {
     console.log("Data")
     const formData = req.body;
     console.log(formData);
