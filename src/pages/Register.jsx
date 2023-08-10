@@ -7,6 +7,11 @@ export default function Register() {
   // Set default message
   const [message, setMessage] = useState('');
 
+  // Function for deleting error message
+  const deleteMessage = () => {
+    setMessage('');
+  }
+
   // Set default state for username and password
   const [username, setUsername] = useState('');
   const [confirmUsername, setConfirmUsername] = useState('');
@@ -56,14 +61,42 @@ export default function Register() {
 
   return (
     <div className="register-container">
-      <Message message={message}/>
+      {message ? <Message message={message} deleteMessage={deleteMessage}/> : ''}
       <div className="register-form-container">
-      <h2>REGISTER</h2>
-      <form className="register-form" onSubmit={handleSubmit}>
-          <input type="text" value={username} onChange={handleUsernameChange} placeholder="Username"/>
-          <input type="text" value={confirmUsername} onChange={handleConfirmUsernameChange} placeholder="Confirm Username"/>
-          <input type="password" value={password} onChange={handlePasswordChange} placeholder="Password"/>
-          <input type="password" value={confirmPassword} onChange={handleConfirmPasswordChange} placeholder="Confirm Passwords"/>
+        <h2>REGISTER</h2>
+        <form className="register-form" onSubmit={handleSubmit}>
+          <input
+            minLength={5}
+            maxLength={20} 
+            type="text" 
+            value={username} 
+            onChange={handleUsernameChange} 
+            placeholder="Username"
+          />
+          <input
+            minLength={5} 
+            maxLength={20}
+            type="text" value={confirmUsername}
+            onChange={handleConfirmUsernameChange} 
+            placeholder="Confirm Username"
+          />
+          <input
+            minLength={5}
+            maxLength={20} 
+            type="password" 
+            value={password} 
+            onChange={handlePasswordChange} 
+            placeholder="Password"
+            required
+          />
+          <input
+            minLength={5}
+            maxLength={20} 
+            type="password" 
+            value={confirmPassword} 
+            onChange={handleConfirmPasswordChange} 
+            placeholder="Confirm Passwords"
+          />
           <button type="submit">Submit</button>
         </form>
       </div>
