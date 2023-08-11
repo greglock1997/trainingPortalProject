@@ -7,23 +7,11 @@ const bodyParser = require('body-parser');
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Mongoose Database
-const database = "./database.js"
-
 // Inlcude body parser
 app.use(express.json());
 
 // Serve static files from the Vite build output
 app.use(express.static(path.join(__dirname, 'dist')));
-
-// Test use of api for submitting form data
-app.post('/register', (req, res) => {
-    console.log("Data")
-    const formData = req.body;
-    console.log(formData);
-    // Return status message to ensure registration is valid
-    res.status(200).send('Registration successful');
-});
 
 // Route to serve your React app
 app.get('*', (req, res) => {
