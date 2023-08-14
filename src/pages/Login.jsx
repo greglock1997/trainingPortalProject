@@ -17,7 +17,6 @@ export default function Login() {
   }
 
   const handleSubmit = async (error) => {
-    if ((username == "Me") && (password == "MyPassword")) {
       try {
         const response = await fetch('/login', {
           method: 'POST',
@@ -29,13 +28,12 @@ export default function Login() {
       } catch (error) {
         console.log('Error submitting form', error)
       }
-    } else {
-      console.log('Invalid username and / or password')
     }
-  }
 
   return (
     <div className="login-container">
+      <img src="OTMlogo.png" alt="" />
+      <h1>Welcome to your OTM Training and Education Portal </h1>
       <div className="login-form-container">
         <h2>LOGIN</h2>
         <form className="login-form" onSubmit={handleSubmit}>
