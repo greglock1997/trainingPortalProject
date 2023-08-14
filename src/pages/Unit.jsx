@@ -12,6 +12,8 @@ export default function Unit() {
     const [questionsAnswered, setQuestionsAnswered] = useState(0);
     const [score, setScore] = useState(0);
 
+    const currentArticle = articleData[unitNumber];
+
     const handleAnswer = () => {
         setQuestionsAnswered(questionsAnswered + 1);
     }
@@ -29,8 +31,6 @@ export default function Unit() {
     }, [unitNumber]);
 
     console.log(articleData[unitNumber]);
-
-    const currentArticle = articleData[unitNumber];
 
     return (
         <div className="unit-quiz-container">
