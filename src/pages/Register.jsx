@@ -80,7 +80,7 @@ export default function Register() {
           <input
             minLength={5}
             maxLength={20} 
-            type="text" 
+            type="text"
             value={username} 
             onChange={handleUsernameChange} 
             placeholder="Username"

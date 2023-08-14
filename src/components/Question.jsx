@@ -33,8 +33,8 @@ export default function Question(props) {
 
     return (
         <div className="question-container">
-            <h1>Question</h1>
-            <h2>{props.question.question}</h2>
+            <h1 className="question-title">Question {props.questionNumber}</h1>
+            <h2 className="question-content">{props.question.question}</h2>
             <div className="question-answers">
                 {answerButtons}
             </div>

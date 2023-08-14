@@ -1,6 +1,7 @@
 const questionData = {
     1: [
-        {
+        {   
+            questionNumber: 1,
             question: "U1Q1",
             answers: [
                 "1",
@@ -10,7 +11,8 @@ const questionData = {
             ],
             correctAnswer: 0
         },
-        {
+        {   
+            questionNumber: 2,
             question: "U1Q2",
             answers: [
                 "1",
@@ -21,6 +23,7 @@ const questionData = {
             correctAnswer: 3
         },
         {
+            questionNumber: 3,
             question: "U1Q3",
             answers: [
                 "1",
@@ -31,6 +34,7 @@ const questionData = {
             correctAnswer: 2
         },
         {
+            questionNumber: 4,
             question: "U1Q4",
             answers: [
                 "1",

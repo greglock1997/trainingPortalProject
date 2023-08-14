@@ -30,23 +30,26 @@ export default function Unit() {
         }
     }, [unitNumber]);
 
-    console.log(articleData[unitNumber]);
-
     return (
-        <div className="unit-quiz-container">
-            <Article article={currentArticle[0]}/>
+        <div className="unit-container">
             <div className="progress-bar-container">
-                <div className="progress-bar" style={{width: `${700 * (questionsAnswered / 4 )}px`}}></div>
+                <div className="progress-bar" style={{width: `${window.innerWidth * (questionsAnswered / questions.length )}px`}}></div>
             </div>
+            <Article article={currentArticle[0]}/>
             {questions.map((question, index) => (
                 <Question
-                    key={index} 
+                    key={index}
+                    questionNumber={index + 1}
                     question={question} 
                     onAnswer={handleAnswer}
                     onCorrectAnswer={handleCorrectAnswer}
                 />
             ))}
-            <h1>Score : {score} / 4</h1>
+            {questionsAnswered === questions.length ? (
+               <h1 className="unit-score">Score : {score} / {questions.length}</h1>
+            ) : (
+                null    
+            )}
         </div>
     );
 }
