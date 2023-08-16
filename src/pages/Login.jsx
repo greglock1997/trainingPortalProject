@@ -22,9 +22,11 @@ export default function Login({ setIsLoggedIn }) {
   // Handle login
   const handleLogin = async () => {
     try {
-      const response = await axios.post('/login', { username, password});
+      const response = await axios.post('/login', { username, password });
       if (response.status === 200) {
-        console.log("Login successful")
+        setIsLoggedIn(true);
+        await localStorage.setItem('loggedInStatus', 'true');
+        navigate('/dashboard');
       } else {
         console.error("Login failed")
       }
@@ -38,11 +40,7 @@ export default function Login({ setIsLoggedIn }) {
     event.preventDefault();
     
     if ((username === "Foxglove") && (password === "Energy")) {
-      setIsLoggedIn(true);
-
-      /* POST ROUTE TEST */
       handleLogin();
-      navigate('/dashboard');
     } else {
       setMessage('Invalid login credentials');
     }

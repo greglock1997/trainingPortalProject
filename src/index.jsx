@@ -11,23 +11,23 @@ import './index.css'
 export default function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-    const logout = () => {
-        setIsLoggedIn(false);
-    }
-
     useEffect(() => {
         async function fetchLoginStatus() {
-            try {
-                const response = await fetch('/checkIsLoggedIn');
-                const data = await response.json();
-                setIsLoggedIn(data.isLoggedIn);
-            } catch (error) {
-                console.error('Error fetching session status', error);
-            }
+          try {
+            const response = await fetch('/checkIsLoggedIn');
+            const data = await response.json();
+            setIsLoggedIn(data.isLoggedIn);
+          } catch (error) {
+            console.error('Error fetching session status', error);
+          }
         }
-        console.log(isLoggedIn);
         fetchLoginStatus();
-    }, [])
+    }, [isLoggedIn]);
+
+    const logout = async () => {
+        localStorage.setItem('loggedInStatus', 'false');
+        setIsLoggedIn(false);
+    }
 
     return (
         <BrowserRouter>
@@ -36,7 +36,7 @@ export default function App() {
                     {!isLoggedIn ? <Link to="/login">Login</Link> : ''}
                     {!isLoggedIn ? <Link to="/register">Register</Link> : ''}
                     {isLoggedIn ? <Link to="/dashboard">Dashboard</Link> : ''}
-                    {isLoggedIn ? <Link to="/login" onClick={logout}>Logout</Link> : ''}
+                    {!isLoggedIn ? <Link to="/logout" onClick={logout}>Logout</Link> : ''}
                 </header>
                 <Routes>
                     <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />

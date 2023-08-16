@@ -6,6 +6,8 @@ const session = require('express-session');
 const cors = require('cors');
 const mongoose = require('mongoose');
 
+const User = require('./server/models/User.js');
+
 // Set express to app for quick use
 const app = express();
 const port = process.env.PORT || 3000;
@@ -41,12 +43,20 @@ app.use(express.static(__dirname));
 
 // Login post test route
 app.post('/login', async (req, res) => {
-  req.session.user = await req.body.username;
+  req.session.user = req.body.username;
+  req.session.isLoggedIn = true;
+  res.status(200).send();
 });
+
+app.post('/logout', (req, res) => {
+  console.log(req.session.user);
+  req.session.destroy();
+  res.json({ message: 'Logout successful' });
+  console.log("Logging out")
+})
 
 app.get('/checkIsLoggedIn', (req, res) => {
   const isLoggedIn = req.session.user ? true : false;
-  console.log("Login Check");
   res.json({ isLoggedIn });
 });
 

@@ -1,11 +1,12 @@
 import React, {useState} from 'react'
-import {Link} from 'react-router-dom' 
+import {Link} from 'react-router-dom'
+import axios from 'axios' 
 
 export default function Header() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     const logout = () => {
-        setIsLoggedIn(false);
+        axios.post('/logout');
     }
 
     return (
