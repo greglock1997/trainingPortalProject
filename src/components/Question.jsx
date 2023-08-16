@@ -2,18 +2,23 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 
 export default function Question(props) {
+    // Index to show current selected answer for each question
     const [selectedAnswerIndex, setSelectedAnswerIndex] = useState(null);
+
+    // Anytime the resetAnswers value changes the selectedAnswerIndex will be reset
+    // This allows us to reset the quiz
+    useEffect(() => {
+        setSelectedAnswerIndex(null);
+    }, [props.resetAnswers]);
 
     const handleAnswerClick = (index) => {
         setSelectedAnswerIndex(index);
-
         props.onAnswer();
-
         if (index === props.question.correctAnswer) {
             props.onCorrectAnswer();
         }
     };
-
+    
     const answerButtons = props.question.answers.map((answer, index) => (
         <button
             key={index}

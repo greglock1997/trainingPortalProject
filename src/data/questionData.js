@@ -43,44 +43,44 @@ const questionData = {
     ],
     2: [
         {
-            question: "U2Q1",
+            question: "Which of the following is Ofgem not responsible for?",
             answers: [
-                "1",
-                "2",
-                "3",
-                "4"
+                "Setting safety standards for electricty",
+                "Stamping out sharp and bad practice",
+                "Enabling competition and innovation",
+                "Working with the government and industry to deliver the lowest cost to consumers"
             ],
             correctAnswer: 0
         },
         {
-            question: "U2Q2",
+            question: "Which of these is an example of a renewable energy source?",
             answers: [
-                "1",
-                "2",
-                "3",
-                "4"
+                "Nuclear",
+                "Geothermal",
+                "Natural Gas",
+                "Oil"
             ],
-            correctAnswer: 0
+            correctAnswer: 1
         },
         {
-            question: "U2Q3",
+            question: "Why should a customer choose Outfox The Market?",
             answers: [
-                "1",
-                "2",
-                "3",
-                "4"
+                "Rated #1 for customer service in the 'Which?' 2020 customer survey",
+                "100% renewable energy",
+                "Rated 4.5 on Trust Pilot",
+                "All of the above"
             ],
-            correctAnswer: 0
+            correctAnswer: 3
         },
         {
-            question: "U2Q4",
+            question: "Why does renewable energy usually cost more for suppliers to provide to their customers?",
             answers: [
-                "1",
-                "2",
-                "3",
-                "4"
+                "Renewable energy sources are less common",
+                "Suppliers are required to pay for certification of green energy",
+                "Energy made from renewable sources is harder to distribute over long distances",
+                "Taxes for renewable energy sources are higher than others"
             ],
-            correctAnswer: 0
+            correctAnswer: 1
         }
     ],
     3: [
@@ -127,86 +127,126 @@ const questionData = {
     ],
     4: [
         {
-            question: "U4Q1",
+            question: "What does EPG stand for?",
             answers: [
-                "1",
-                "2",
-                "3",
-                "4"
+                "Electrictity Production Grid",
+                "Emission Performance Goals",
+                "Energy Pricing Group",
+                "Energy Price Gaurantee"
+            ],
+            correctAnswer: 3
+        },
+        {
+            question: "Who does the EPG apply to?",
+            answers: [
+                "All househoulds in Great Britain",
+                "Low income households in the United Kingdom",
+                "All households in the United Kingdom with a domestic gas or electricity contract",
+                "Outfox The Market customers with a domestic gas or electricity contract"
+            ],
+            correctAnswer: 2
+        },
+        {
+            question: "What is the maximum charge for electricty for customers paying by Direct Debit under the EPG?",
+            answers: [
+                "34.0p/kWh",
+                "10.3p/kWh",
+                "34.0p/mWh",
+                "40p/kWh"
             ],
             correctAnswer: 0
         },
         {
-            question: "U4Q2",
+            question: "What is the maximum charge for gas for customers paying on receipt of their bill under the EPG?",
             answers: [
-                "1",
-                "2",
-                "3",
-                "4"
+                "15.7p/kWh",
+                "11.1p/gWh",
+                "11.1p/kWh",
+                "14.2p/mWh"
             ],
-            correctAnswer: 0
+            correctAnswer: 2
         },
         {
-            question: "U4Q3",
+            question: "During which time period will the EPG be in effect?",
             answers: [
-                "1",
-                "2",
-                "3",
-                "4"
+                "From November 1st, 2022 to June 30th, 2023",
+                "From October 1st, 2022 to June 30th, 2023",
+                "From October 30th, 2022 to June 1st, 2023",
+                "From October 1st, 2022 to July 1st, 2023"
             ],
-            correctAnswer: 0
+            correctAnswer: 1
         },
         {
-            question: "U4Q4",
+            question: "According to Ofgem, how much electricity does the average UK household use annually?",
             answers: [
-                "1",
-                "2",
-                "3",
-                "4"
+                "2,900kWh",
+                "3,000kWh",
+                "1,500kWh",
+                "4,000kWh"
             ],
             correctAnswer: 0
         }
     ],
     5: [
         {
-            question: "U5Q1",
+            question: "Which of these is a valid unit of gas?",
             answers: [
-                "1",
-                "2",
-                "3",
-                "4"
+                "Kilograms",
+                "Meters",
+                "Cubic meters",
+                "Seconds"
             ],
-            correctAnswer: 0
+            correctAnswer: 2
         },
         {
-            question: "U5Q2",
+            question: "What does MPRN stand for?",
             answers: [
-                "1",
-                "2",
-                "3",
-                "4"
+                "Meter Point Access Number",
+                "Meter Point Administration Number",
+                "Meter Point Allocation Number",
+                "Meter Point Area Number"
             ],
-            correctAnswer: 0
+            correctAnswer: 1
         },
         {
-            question: "U5Q3",
+            question: "Who is responsible for the Service Cable in a meter cupboard?",
             answers: [
-                "1",
-                "2",
-                "3",
-                "4"
+                "The Supplier",
+                "The Customer",
+                "The Distribution Network Operator",
+                "All of the above"
             ],
-            correctAnswer: 0
+            correctAnswer: 2
         },
         {
-            question: "U5Q4",
+            question: "Which of these should you NOT do if you smell gas in your home?",
             answers: [
-                "1",
-                "2",
-                "3",
-                "4"
+                "Open windows and doors",
+                "Turn off the gas at the mains tap",
+                "Call the National Gas Emergency Service",
+                "Turn power switches and light switches off"
             ],
-            correctAnswer: 0
+            correctAnswer: 3
+        },
+        {
+            question: "How many digits are there in an MPRN?",
+            answers: [
+                "8",
+                "9",
+                "10",
+                "11"
+            ],
+            correctAnswer: 2
+        },
+        {   
+            question: "Which of these is NOT insider a meter cupboard?",
+            answers: [
+                "Service cable",
+                "In Home Display",
+                "Communications hub",
+                "Meter board"
+            ],
+            correctAnswer: 1
         }
     ],
     6: [

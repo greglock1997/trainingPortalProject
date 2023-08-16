@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
+import { animateScroll as scroll } from 'react-scroll';
 import Article from '../components/Article.jsx'
 import Question from '../components/Question.jsx'
 import articleData from '../data/articleData.js'
@@ -11,6 +12,7 @@ export default function Unit() {
     const [questions, setQuestions] = useState([]);
     const [questionsAnswered, setQuestionsAnswered] = useState(0);
     const [score, setScore] = useState(0);
+    const [resetAnswers, setResetAnswers] = useState(false);
 
     const currentArticle = articleData[unitNumber];
 
@@ -22,11 +24,39 @@ export default function Unit() {
         setScore(score + 1);
     }
 
+    // Randomise questions
+    const shuffleArray = (array) => {
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+      }
+
+      
+    // Reset quiz
+    const handleResetQuiz = () => {
+        setQuestionsAnswered(0);
+        setScore(0);
+        setResetAnswers(!resetAnswers);
+        scroll.scrollToTop({
+            duration: 1000,
+            smooth: "easeInOutQuart"
+        });
+    };
+      
+    useEffect(() => {
+        if (resetAnswers) {
+            setQuestions(shuffleArray(questionData[unitNumber]));
+            setResetAnswers(false);
+        }
+    }, [resetAnswers]);
+
     useEffect(() => {
         if (questionData) {
-            setQuestions(questionData[unitNumber]);
+            setQuestions(shuffleArray(questionData[unitNumber]));
         } else {
-            console.log("No data")
+            console.log("No data");
         }
     }, [unitNumber]);
 
@@ -35,7 +65,6 @@ export default function Unit() {
             <div className="progress-bar-container">
                 <div className="progress-bar" style={{width: `${window.innerWidth * (questionsAnswered / questions.length )}px`}}></div>
             </div>
-            <Article article={currentArticle[0]}/>
             {questions.map((question, index) => (
                 <Question
                     key={index}
@@ -43,12 +72,13 @@ export default function Unit() {
                     question={question} 
                     onAnswer={handleAnswer}
                     onCorrectAnswer={handleCorrectAnswer}
+                    resetAnswers={resetAnswers}
                 />
             ))}
             {questionsAnswered === questions.length ? (
-               <h1 className="unit-score">Score : {score} / {questions.length}</h1>
+                <h2 className="unit-reset-button" onClick={handleResetQuiz}>You Scored {score}/{questions.length}, Try Again?</h2>
             ) : (
-                null    
+                <h2 className="unit-reset-button" onClick={handleResetQuiz}>Reset Quiz</h2>
             )}
         </div>
     );

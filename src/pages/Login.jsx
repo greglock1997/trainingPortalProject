@@ -1,13 +1,14 @@
 import React from 'react'
 import { useState } from 'react'
-import '../assets/styles/login.css'
+import { useNavigate } from 'react-router-dom'
 
-export default function Login() {
+export default function Login({ setIsLoggedIn }) {
   // Set default state for username and password
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
-  // Hanlde username and password changes in input form
+  // Handle username and password changes in input form
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
   }
@@ -16,23 +17,18 @@ export default function Login() {
     setPassword(event.target.value); 
   }
 
-  const handleSubmit = async (error) => {
-      try {
-        const response = await fetch('/login', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({username, password})
-        })
-      } catch (error) {
-        console.log('Error submitting form', error)
-      }
+  const handleSubmit = () => { 
+    if ((username === "Foxglove") && (password === "Energy")) {
+        setIsLoggedIn(true);
+        navigate('/dashboard');
+    } else {
+      console.log("INCORRECT")
     }
+  }
 
   return (
     <div className="login-container">
-      <img src="OTMlogo.png" alt="" />
+      <img src="../src/assets/images/logo.png" alt="" />
       <h1>Welcome to your OTM Training and Education Portal </h1>
       <div className="login-form-container">
         <h2>LOGIN</h2>

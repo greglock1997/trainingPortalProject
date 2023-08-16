@@ -51,7 +51,7 @@ header a:hover {
     justify-content: flex-start;
     font-family: 'Maven Pro', sans-serif;
     background-color: #FFFFFF;
-    background-image: url("image4.png");
+    background-image: url("../src/assets/images/background.png");
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -96,6 +96,8 @@ header a:hover {
     margin-top: 30px;
     padding: 10px;
     border-radius: 2.5px;
+    border: none;
+    outline: none;
 }
 
 .login-form button {
@@ -107,17 +109,63 @@ header a:hover {
     color: #2E549E;
     font-size: 15px;
     cursor: pointer;
+    border: none;
+    transition: 0.3s;
+    box-sizing: border-box;
+}
+
+.login-form button:hover {
+    background-color: #2E549E;
+    color: #FFFFFF;
+    border: 1px solid #FFFFFF;
+    box-sizing: border-box;
 }
 
 /* REGISTER PAGE */
 
+
+
 .register-container {
-    display: flex;
     flex: 1;
     width: 100%;
+    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    font-family: 'Maven Pro', sans-serif;
+    background-color: #FFFFFF;
+    background-image: url("../src/assets/images/background.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.register-form-container h2 {
+    font-size: 30px;
+}
+
+.register-form input {
+    width: 200px;
+    margin-top: 30px;
+    padding: 10px;
+    border-radius: 2.5px;
+}
+
+.register-form button {
+    margin-top: 30px;
+    padding: 10px;
+    width: 100%;
+    border-radius: 2.5px;
+    background-color: #FFFFFF;
+    color: #2E549E;
+    font-size: 15px;
+    cursor: pointer;
 }
 
 .register-form-container {
@@ -132,29 +180,6 @@ header a:hover {
     box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 2px, rgba(0, 0, 0, 0.07) 0px 4px 4px, rgba(0, 0, 0, 0.07) 0px 8px 8px, rgba(0, 0, 0, 0.07) 0px 16px 16px;
 }
 
-.register-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.register-form input {
-    margin-top: 20px;
-    padding: 5px;
-    border-radius: 2.5px;
-}
-
-.register-form button {
-    margin-top: 20px;
-    padding: 10px;
-    width: 100%;
-    border-radius: 2.5px;
-    background-color: #FFFFFF;
-    color: #2E549E;
-    font-size: 15px;
-    cursor: pointer;
-}
 
 /* DASHBOARD PAGE */
 
@@ -190,6 +215,12 @@ header a:hover {
     font-weight: 700;
     cursor: pointer;
     text-decoration: none;
+    transition: 0.5s;
+}
+
+.unit-link:hover {
+    background: linear-gradient(to bottom right, #2E549E 40%, #B22222);
+
 }
 
 .unit-link:hover {
@@ -199,6 +230,9 @@ header a:hover {
 /* MESSAGE COMPONENT */
 
 .message-container {
+    width: 200px;
+    height: 100px;
+    background-color: #B22222;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -222,6 +256,7 @@ header a:hover {
 .unit-container {
     flex: 1;
     width: 100%;
+    padding-top: 100px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -238,7 +273,37 @@ header a:hover {
     background: linear-gradient(to bottom right, #FFA500, #FFD700);
 }
 
+.unit-reset-button {
+    margin-bottom: 100px;
+    padding: 40px;
+    border-radius: 100px;
+    color: #FFFFFF;
+    background: linear-gradient(to bottom right, #FFA500, #FFD700);
+    cursor: pointer;    
+}
+
+.unit-article {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 800px;
+    margin: 100px;
+    padding: 20px;
+    border: 5px solid #2E549E;    
+}
+
+.unit-article h1 {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.unit-article p {
+    margin-bottom: 20px;
+}
+
 .question-container {
+    max-width: 800px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -266,14 +331,15 @@ header a:hover {
     margin-top: 10px;
     margin-bottom: 10px;
     background-color: #2E549E;
+    opacity: 0.9;
     color: #FFFFFF;
-    border-radius: 10px;
+    border-radius: 2.5px;
     cursor: pointer;
     transition: 0.5s;    
 }
 
 .answer-correct {
-    background-color: #00FF7F;
+    background-color: #51A151;
 }
 
 .answer-incorrect {

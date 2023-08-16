@@ -2,7 +2,6 @@ import React from 'react';
 import { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import Message from '../components/Message.jsx'
-import '../assets/styles/login.css'
 
 export default function Register() {
   // Set default message
