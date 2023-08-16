@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React from "react"
 import { Outlet, Navigate } from "react-router-dom"
 
 export default function AuthRequired({ isLoggedIn }) {

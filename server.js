@@ -25,12 +25,11 @@ db.once('open', () => {
   console.log('Connected to MongoDB');
 });
 
-
 // Use express-session middleware
 app.use(session({
   secret: 'secret-key',
-  resave: false,
-  saveUninitialized: true
+  resave: true,
+  saveUninitialized: false
 }));
 
 // Inlcude body parser
@@ -39,6 +38,22 @@ app.use(express.json());
 // Serve static files from the Vite build output
 app.use(express.static(path.join(__dirname, 'dist')));
 app.use(express.static(__dirname));
+
+// Login post test route
+app.post('/login', async (req, res) => {
+  req.session.user = await req.body.username;
+});
+
+app.get('/checkIsLoggedIn', (req, res) => {
+  const isLoggedIn = req.session.user ? true : false;
+  console.log("Login Check");
+  res.json({ isLoggedIn });
+});
+
+// Register test route
+app.post('/register', (req, res) => {
+  console.log("Request received");
+});
 
 // Route to serve your React app
 app.get('*', (req, res) => {
