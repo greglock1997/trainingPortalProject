@@ -51,6 +51,7 @@ app.post('/login', async (req, res) => {
 app.post('/logout', (req, res) => {
   console.log(req.session.user);
   req.session.destroy();
+  localStorage.setItem('loggedInStatus', false);
   res.json({ message: 'Logout successful' });
   console.log("Logging out")
 })

@@ -25,7 +25,7 @@ export default function Login({ setIsLoggedIn }) {
       const response = await axios.post('/login', { username, password });
       if (response.status === 200) {
         setIsLoggedIn(true);
-        await localStorage.setItem('loggedInStatus', 'true');
+        await localStorage.setItem('loggedInStatus', true);
         navigate('/dashboard');
       } else {
         console.error("Login failed")

@@ -22,7 +22,7 @@ export default function App() {
           }
         }
         fetchLoginStatus();
-    }, [isLoggedIn]);
+    }, []);
 
     const logout = async () => {
         localStorage.setItem('loggedInStatus', 'false');
@@ -36,7 +36,7 @@ export default function App() {
                     {!isLoggedIn ? <Link to="/login">Login</Link> : ''}
                     {!isLoggedIn ? <Link to="/register">Register</Link> : ''}
                     {isLoggedIn ? <Link to="/dashboard">Dashboard</Link> : ''}
-                    {!isLoggedIn ? <Link to="/logout" onClick={logout}>Logout</Link> : ''}
+                    {isLoggedIn ? <Link to="/logout" onClick={logout}>Logout</Link> : ''}
                 </header>
                 <Routes>
                     <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
