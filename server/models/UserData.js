@@ -10,8 +10,8 @@ const userDataSchema = new mongoose.Schema({
     unitsCompleted: [
         {
             unitId: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'Unit'
+                type: Number,
+                unique: true
             },
             completedData: {
                 type: Date,
@@ -21,6 +21,6 @@ const userDataSchema = new mongoose.Schema({
     ]
 });
 
-const User = mongoose.model('User', userSchema);
+const UserData = mongoose.model('UserData', userDataSchema);
 
-module.exports = User;
+module.exports = UserData;

@@ -12,7 +12,7 @@ export default function Login({ setIsLoggedIn }) {
 
   // Reset login status
   useEffect(() => {
-    setIsLoggedIn(false);
+    axios.post('/logout');
   }, []);
 
   // Handle username and password changes in input form
@@ -29,12 +29,13 @@ export default function Login({ setIsLoggedIn }) {
     event.preventDefault();
     try {
       const response = await axios.post('/login', { username, password });
-      if (response.status === 200) {
+      const status = response.data.status;
+      if (status === 200) {
         setIsLoggedIn(true);
         navigate('/dashboard');
       } else {
-        console.log("User not recognised")
-        navigate('/register');
+        setMessage("User not recognised");
+        console.log("User not recognised");
       }
     } catch (error) {
       console.error('Error: ', error);

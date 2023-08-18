@@ -10,6 +10,8 @@ const cookieParser = require('cookie-parser');
 
 // Database models
 const User = require('./server/models/User.js');
+const userData = require('./server/models/UserData.js');
+const UserData = require('./server/models/UserData.js');
 
 // Set express to app for quick use
 const app = express();
@@ -56,7 +58,7 @@ app.post('/login', async (req, res) => {
 
     // If no user is found, send a message back to the login page
     if(!user) {
-      return res.status(401).json({ message: 'Invalid credentials' });
+      return res.json({status: 401, message: 'Invalid credentials' });
     }
 
     // Check that password input matches with the encrypted password stored in the database
@@ -64,15 +66,15 @@ app.post('/login', async (req, res) => {
 
     // If the password does not match the one found in the database send message
     if(!isPasswordValid) {
-      return res.status(401).json({ message: 'Invalid credentials' });
+      return res.json({ status: 401, message: 'Invalid credentials' });
     }
 
     // Test to use cookies to store user session data
     res.cookie('user', username, { maxAge: 3600000, httpOnly: true });
-    res.status(200).json({ message: 'Login successful' });
+    res.json({status: 200, message: 'Login successful' });
   } catch(error) {
     console.error('Error during login: ', error);
-    res.status(500).json({ message: 'An error occurred'});
+    res.json({status: 500, message: 'An error occurred'});
   }
 
   console.log(req.cookies.user);
@@ -81,16 +83,12 @@ app.post('/login', async (req, res) => {
 // Logout
 app.post('/logout', (req, res) => {
   res.clearCookie('user');
-  console.log("User logged out")
-  console.log(req.cookies.user);
   res.json({ message: 'Logout successful' });
 })
 
 // Check to see if user is logged in
 app.get('/check-auth', (req, res) => {
-  //const isLoggedIn = req.session.user ? true : false;
   const isLoggedIn = !!req.cookies.user;
-  console.log("Checking authorisation");
   res.json({ isLoggedIn });
 });
 
@@ -101,11 +99,12 @@ app.post('/register', async (req, res) => {
   // Check to see if user is already present in database
   const registeredUser = await User.findOne({ username });
 
-  if (registeredUser) {
-    return await res.status(409).json({ message: 'User already registered' });
-  }
-
   try {
+    if (registeredUser) {
+      console.log("user already registered");
+      return res.json({ status: 409, message: 'User already registered' });
+    }
+
     //  Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = new User({ username, password: hashedPassword });
@@ -116,9 +115,49 @@ app.post('/register', async (req, res) => {
   }
 });
 
+// Get unit data
+app.get('/get-data', async (req, res) => {
+  const username = req.cookies.user;
+  const userData = await UserData.findOne({ username });
+  const completedUnits = userData.unitsCompleted;
+
+  const completedUnitsArray = completedUnits.map(unit => unit.unitId);
+
+  console.log(completedUnitsArray);
+  return res.json(completedUnitsArray);
+});
+
 // Save data
 app.post('/save-data', async (req, res) => {
-  console.log("Saved");
+  const username = req.cookies.user;
+  const unitId = req.body.unitNumber;
+  console.log(unitId);
+
+  const userData = await UserData.findOne({ username });
+
+
+  if (!userData) {
+    const newUserData = new UserData({ username });
+    await newUserData.save();
+  } else {
+    console.log(userData);
+    console.log(userData.unitsCompleted);
+  }
+
+  const isCompleted = userData.unitsCompleted.some(unit => unit.unitId.toString() === unitId);
+
+  if (isCompleted) {
+    console.log("Unit already completed");
+    return res.status(409).json({ message: 'Unit already completed' });
+  }
+
+  userData.unitsCompleted.push({
+    unitId: req.body.unitNumber,
+    completedDate: Date.now()
+  });
+
+  await userData.save();
+  console.log(userData);
 })
 
 // Route to serve your React app

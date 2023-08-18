@@ -23,7 +23,7 @@ export default function App() {
           }
         }
         fetchLoginStatus();
-    }, []);
+    });
 
     const logout = async () => {
         try {

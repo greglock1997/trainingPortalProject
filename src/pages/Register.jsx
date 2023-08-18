@@ -1,10 +1,10 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import axios from 'axios';
 import Message from '../components/Message.jsx'
 
-export default function Register({ setIsLoggedIn }) {
+export default function Register() {
   // Set default message
   const [message, setMessage] = useState('');
 
@@ -14,7 +14,9 @@ export default function Register({ setIsLoggedIn }) {
   }
 
   // Reset login status
-  // localStorage.setItem('loggedInStatus', 'false');
+  useEffect(() => {
+    axios.post('/logout');
+  }, []);
 
   // Set valid status
   const [isRegistered, setIsRegistered] = useState(false);
@@ -45,20 +47,17 @@ export default function Register({ setIsLoggedIn }) {
   const handleSubmit = async (event) => {
     // Prevents page refresh
     event.preventDefault();
-
+    
     if ((username === confirmUsername) && (password === confirmPassword)) {
-      try {
         const response = await axios.post('/register', { username, password});
-        if (response.status === 200) {
+        const status = response.data.status;
+        if (status === 200) {
           setIsRegistered(true);
-          setIsLoggedIn(false);
-        } else if (response.status === 409){
+        } else if (status === 409){
           setMessage(response.data.message);
-          console.log(response.data.message);
+        } else {
+          console.log("Undefined Error");
         }
-      } catch (error) {
-        console.log('Error submitting form', error.reponse)
-      }
     } else if (username === confirmUsername) {
       setMessage('Passwords do not match')
     } else if (password === confirmPassword) {
