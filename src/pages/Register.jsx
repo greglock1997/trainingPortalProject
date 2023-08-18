@@ -1,9 +1,10 @@
 import React from 'react';
 import { useState } from 'react';
 import { Navigate } from 'react-router-dom';
+import axios from 'axios';
 import Message from '../components/Message.jsx'
 
-export default function Register() {
+export default function Register({ setIsLoggedIn }) {
   // Set default message
   const [message, setMessage] = useState('');
 
@@ -11,6 +12,9 @@ export default function Register() {
   const deleteMessage = () => {
     setMessage('');
   }
+
+  // Reset login status
+  // localStorage.setItem('loggedInStatus', 'false');
 
   // Set valid status
   const [isRegistered, setIsRegistered] = useState(false);
@@ -44,18 +48,16 @@ export default function Register() {
 
     if ((username === confirmUsername) && (password === confirmPassword)) {
       try {
-        const response = await fetch('/register', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({username, password}),
-        });
-        if (response.ok) {
+        const response = await axios.post('/register', { username, password});
+        if (response.status === 200) {
           setIsRegistered(true);
+          setIsLoggedIn(false);
+        } else if (response.status === 409){
+          setMessage(response.data.message);
+          console.log(response.data.message);
         }
       } catch (error) {
-        console.log('Error submitting form', error)
+        console.log('Error submitting form', error.reponse)
       }
     } else if (username === confirmUsername) {
       setMessage('Passwords do not match')
@@ -66,13 +68,13 @@ export default function Register() {
     }
   };
 
-  if (isRegistered) {
+  if (isRegistered === true) {
     return <Navigate to="/login" />
   }
 
   return (
     <div className="register-container">
-      {message ? <Message message={message} deleteMessage={deleteMessage}/> : ''}
+      {message && <Message message={message} deleteMessage={deleteMessage}/> }
       <div className="register-form-container">
         <h2>REGISTER</h2>
         <form className="register-form" onSubmit={handleSubmit}>

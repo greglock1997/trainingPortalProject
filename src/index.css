@@ -357,15 +357,14 @@ header a:hover {
 
 .progress-bar-container {
     position: fixed;
-    top: 0px;
+    bottom: 0px;
     display: flex;
     align-items: center;
     justify-content: flex-start;
     background-color: #2E549E;
     height: 10px;
     width: 100%;
-    margin-bottom: 40px;
-    z-index: 1;
+    margin-bottom: 0px;
 }
 
 .progress-bar {

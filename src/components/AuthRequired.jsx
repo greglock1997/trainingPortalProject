@@ -1,16 +1,28 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import { Outlet, Navigate } from "react-router-dom"
+import axios from "axios";
 
 export default function AuthRequired() {
-    const isLoggedIn = localStorage.getItem('loggedInStatus') === 'true';
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        axios.get("/check-auth")
+            .then(response => {
+                setIsLoggedIn(response.data.isLoggedIn);
+                setLoading(false);
+            })
+            .catch(error => {
+                setLoading(false);
+            });
+    }, []);
+
+    if (loading) {
+        return null;
+    }
 
     if (!isLoggedIn) {
-        console.log(localStorage.getItem('loggedInStatus'));
-        console.log("Logged out")
         return <Navigate to="/login" />
-    } else {
-        console.log("Logged in");
-        console.log(localStorage.getItem('loggedInStatus'));
     }
 
     return <Outlet />

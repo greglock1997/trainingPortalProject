@@ -2,6 +2,7 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { animateScroll as scroll } from 'react-scroll';
+import axios from 'axios';
 import Unit1 from '../pages/units/Unit1.jsx'
 import Unit2 from '../pages/units/Unit2.jsx'
 import Unit3 from '../pages/units/Unit3.jsx'
@@ -90,6 +91,12 @@ export default function Unit() {
             console.log("No data");
         }
     }, [unitNumber]);
+
+    useEffect(() => {
+        if (questionsAnswered === questions.length) {
+            axios.post('/save-data');
+        }
+    }, [questionsAnswered]);
 
     return (
         currentPage === 'quiz' ? (

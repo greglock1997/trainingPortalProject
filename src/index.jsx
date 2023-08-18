@@ -6,17 +6,18 @@ import Register from './pages/Register.jsx'
 import Dashboard from './pages/Dashboard.jsx'
 import Unit from './pages/Unit.jsx'
 import AuthRequired from './components/AuthRequired.jsx'
+import axios from 'axios';
 import './index.css'
 
 export default function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+    // Update the user's logged in status when loading the application
     useEffect(() => {
         async function fetchLoginStatus() {
           try {
-            const response = await fetch('/checkIsLoggedIn');
-            const data = await response.json();
-            setIsLoggedIn(data.isLoggedIn);
+            const response = await axios.get('/check-auth');
+            setIsLoggedIn(response.data.isLoggedIn)
           } catch (error) {
             console.error('Error fetching session status', error);
           }
@@ -25,8 +26,12 @@ export default function App() {
     }, []);
 
     const logout = async () => {
-        localStorage.setItem('loggedInStatus', 'false');
-        setIsLoggedIn(false);
+        try {
+            await axios.post('/logout');
+            setIsLoggedIn(false);
+        } catch(error) {
+            console.error('Error during logout:', error);
+        }    
     }
 
     return (
@@ -36,11 +41,12 @@ export default function App() {
                     {!isLoggedIn ? <Link to="/login">Login</Link> : ''}
                     {!isLoggedIn ? <Link to="/register">Register</Link> : ''}
                     {isLoggedIn ? <Link to="/dashboard">Dashboard</Link> : ''}
-                    {isLoggedIn ? <Link to="/logout" onClick={logout}>Logout</Link> : ''}
+                    {isLoggedIn ? <Link to="/login" onClick={logout}>Logout</Link> : ''}
                 </header>
                 <Routes>
                     <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
                     <Route path="/register" element={<Register />} />
+                    <Route path="/logout" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
                     <Route element={<AuthRequired isLoggedIn={isLoggedIn} />}>
                         <Route path="/dashboard" element={<Dashboard />} />
                         <Route path="/unit/:unitNumber" element={<Unit />} />
