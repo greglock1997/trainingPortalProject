@@ -93,7 +93,7 @@ export default function Unit() {
     }, [unitNumber]);
 
     useEffect(() => {
-        if ((questionsAnswered === questions.length) && (questions.length > 0)) {
+        if ((questionsAnswered === questions.length) && (questions.length > 0) && (score === questions.length)) {
             axios.post('/save-data', {unitNumber});
         }
     }, [questionsAnswered]);
