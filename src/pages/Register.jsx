@@ -1,12 +1,13 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Message from '../components/Message.jsx'
 
 export default function Register() {
   // Set default message
   const [message, setMessage] = useState('');
+  const navigate = useNavigate();
 
   // Function for deleting error message
   const deleteMessage = () => {
@@ -73,9 +74,8 @@ export default function Register() {
 
   return (
     <div className="register-container">
-      {message && <Message message={message} deleteMessage={deleteMessage}/> }
+      <img src="../src/assets/images/logo.png" alt="" />
       <div className="register-form-container">
-        <h2>REGISTER</h2>
         <form className="register-form" onSubmit={handleSubmit}>
           <input
             minLength={5}
@@ -109,8 +109,10 @@ export default function Register() {
             onChange={handleConfirmPasswordChange} 
             placeholder="Confirm Passwords"
           />
-          <button type="submit">Submit</button>
+          <button type="submit">Register</button>
         </form>
+        <button className="register-form-login-button" onClick={() => navigate('/login')}>Login</button>
+        {message && <div className="register-message-container">{message}</div>}
       </div>
     </div>
   )

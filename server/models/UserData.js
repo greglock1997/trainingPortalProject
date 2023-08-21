@@ -7,18 +7,20 @@ const userDataSchema = new mongoose.Schema({
         unique: true,
         trim: true
     },
-    unitsCompleted: [
-        {
-            unitId: {
-                type: Number,
-                unique: true
-            },
-            completedData: {
-                type: Date,
-                default: Date.now
+    unitsCompleted: {
+        type: [
+            {
+                unitId: {
+                    type: Number
+                },
+                completedDate: {
+                    type: Date,
+                    default: Date.now
+                }
             }
-        }
-    ]
+        ],
+        default: []
+    }
 });
 
 const UserData = mongoose.model('UserData', userDataSchema);

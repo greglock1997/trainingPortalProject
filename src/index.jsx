@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import ReactDOM from 'react-dom/client'
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom' 
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
+ 
 import Login from './pages/Login.jsx'
 import Register from './pages/Register.jsx'
 import Dashboard from './pages/Dashboard.jsx'
@@ -37,12 +38,14 @@ export default function App() {
     return (
         <BrowserRouter>
             <div className="container">
-                <header>
-                    {!isLoggedIn ? <Link to="/login">Login</Link> : ''}
-                    {!isLoggedIn ? <Link to="/register">Register</Link> : ''}
-                    {isLoggedIn ? <Link to="/dashboard">Dashboard</Link> : ''}
-                    {isLoggedIn ? <Link to="/login" onClick={logout}>Logout</Link> : ''}
-                </header>
+                {isLoggedIn && (
+                    <header>
+                        {!isLoggedIn ? <Link to="/login">Login</Link> : ''}
+                        {!isLoggedIn ? <Link to="/register">Register</Link> : ''}
+                        {isLoggedIn ? <Link to="/dashboard">Dashboard</Link> : ''}
+                        {isLoggedIn ? <Link to="/login" onClick={logout}>Logout</Link> : ''}
+                    </header>
+                )}
                 <Routes>
                     <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
                     <Route path="/register" element={<Register />} />

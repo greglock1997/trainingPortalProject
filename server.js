@@ -21,10 +21,17 @@ app.use(cookieParser());
 app.use(cors());
 
 // Connect to the MongoDB database
+mongoose.connect('mongodb://localhost:27017/testDataBase01', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
+/*
 mongoose.connect('mongodb://localhost:27017/myDatabase', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
+*/
 
 const db = mongoose.connection;
 
@@ -109,9 +116,14 @@ app.post('/register', async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = new User({ username, password: hashedPassword });
     await newUser.save();
-    res.status(200).json({ message: 'User registered successfully' });
+
+    // Create blank user data
+    const newUserData = new UserData({ username, unitsCompleted: [] });
+    await newUserData.save();
+
+    res.json({status: 200, message: 'User registered successfully' });
   } catch(error) {
-    res.status(500).json({ message: 'Error registering user' });
+    res.json({status: 500, message: 'Error registering user' });
   }
 });
 
@@ -119,46 +131,45 @@ app.post('/register', async (req, res) => {
 app.get('/get-data', async (req, res) => {
   const username = req.cookies.user;
   const userData = await UserData.findOne({ username });
-  const completedUnits = userData.unitsCompleted;
+  console.log(userData);
 
-  const completedUnitsArray = completedUnits.map(unit => unit.unitId);
-
-  console.log(completedUnitsArray);
-  return res.json(completedUnitsArray);
+  if (userData) {
+    const completedUnits = await userData.unitsCompleted || [];
+    const completedUnitsArray = completedUnits.map(unit => unit.unitId);
+    console.log(completedUnitsArray);
+    return res.json(completedUnitsArray);
+  }
 });
 
 // Save data
 app.post('/save-data', async (req, res) => {
   const username = req.cookies.user;
-  const unitId = req.body.unitNumber;
-  console.log(unitId);
+  const unitNumber = req.body.unitNumber;
+
+  console.log(unitNumber);
 
   const userData = await UserData.findOne({ username });
 
-
-  if (!userData) {
-    const newUserData = new UserData({ username });
-    await newUserData.save();
-  } else {
-    console.log(userData);
-    console.log(userData.unitsCompleted);
-  }
-
-  const isCompleted = userData.unitsCompleted.some(unit => unit.unitId.toString() === unitId);
+  console.log(userData);
+  console.log(userData.unitsCompleted);
+  
+  const isCompleted = userData.unitsCompleted.some(
+    unit => unit.unitId.toString() === unitNumber
+  );
 
   if (isCompleted) {
-    console.log("Unit already completed");
-    return res.status(409).json({ message: 'Unit already completed' });
+    console.log("unit already completed");
+  } else {
+    userData.unitsCompleted.push({
+      unitId: unitNumber,
+      completedDate: Date.now()
+    });
   }
-
-  userData.unitsCompleted.push({
-    unitId: req.body.unitNumber,
-    completedDate: Date.now()
-  });
 
   await userData.save();
   console.log(userData);
 })
+
 
 // Route to serve your React app
 app.get('*', (req, res) => {

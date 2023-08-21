@@ -14,7 +14,7 @@ export default function Unit2(props) {
                     The actual unit rate will vary by region, the discount is also applied specifically to the unit rate and does not limit the annual bill value. This means that households that use more energy will receive higher bills. In effect, the Energy Price Gaurantee will replace the October energy price cap of £3,549 that was confirmed by Ofgem
                 </p>
             </div>
-            <button onClick={props.togglePage}>Button</button>
+            <button className="unit-article-button" onClick={props.togglePage}>Button</button>
         </div>
     );
 }

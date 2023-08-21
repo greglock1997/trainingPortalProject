@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios';
 import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 
 export default function Login({ setIsLoggedIn }) {
   // Set default state for username and password
@@ -45,18 +45,14 @@ export default function Login({ setIsLoggedIn }) {
   return (
     <div className="login-container">
       <img src="../src/assets/images/logo.png" alt="" />
-      {message ? (
-        <h1>{message}</h1>
-      ) : (
-        <h1>Welcome to your OTM Training and Education Portal</h1>
-      )}
       <div className="login-form-container">
-        <h2>LOGIN</h2>
         <form className="login-form" onSubmit={handleLogin}>
           <input type="text" value={username} onChange={handleUsernameChange} placeholder="Username"/>
           <input type="password" value={password} onChange={handlePasswordChange} placeholder="Password"/>
-          <button type="submit">Submit</button>
+          <button type="submit">Login</button>
         </form>
+        <button className="login-form-register-button" onClick={() => navigate('/register')}>Register</button>
+        {message && <div className="login-message-container">{message}</div>}
       </div>
     </div>
   )
