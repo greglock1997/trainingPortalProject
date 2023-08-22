@@ -1,0 +1,35 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.article-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 50px;
+}
+
+.page-container {
+    padding: 50px;
+}
+
+.page-nav-container {
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 25px;
+}
+
+.page-nav-button {
+    font-size: 40px;
+    cursor: pointer;
+}
+
+.hidden {
+    visibility: hidden;
+}

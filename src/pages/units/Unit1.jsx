@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from 'react';
+import unit2Styles from '../../assets/styles/units/unit1.module.css';
 
 const pages = [
     (
         <>
-            <h1>Unit 1</h1>
+            <h1>Page 1</h1>
             <p>
                 The Energy Price Gaurantee (EPG) is government initiative that limits the amount that customers can be charged oer unit of electrictiy and/or gas which was made effective in October 2022. This was done to reduce the amount of energy customers can be charged per unit of gas or electricity, to an annual equivalent of around £2,500 for a typical household in Great Britain.
                 Under the EPG the average unit price for dual fuel customers paying by Direct Debit will be limited to 34.0p/kWh for gas, inclusive of VAT, from 1 October 2022. 
@@ -43,26 +44,27 @@ const pages = [
 export default function Unit1(props) {
     const [pageIndex, setPageIndex] = useState(0);
 
-    const previousPage = () => {
+    const previousPage = async () => {
         if (pageIndex > 0) {
             setPageIndex(pageIndex - 1);
         }
     }
 
-    const nextPage = () => {
-        if (pageIndex < pages.length) {
+    const nextPage = async () => {
+        if (pageIndex < (pages.length - 1)) {
             setPageIndex(pageIndex + 1);
         }
     }
 
     return (
-        <div className="article-container">
-            <div className="unit-article">
+        <div className={unit2Styles['article-container']}>
+            <div className={unit2Styles['page-container']}>
                 {pages[pageIndex]}
             </div>
-            <div className="unit-nav-button-container">
-                <div className="nav-button" onClick={previousPage}>&#8656;</div>
-                <div className="nav-button" onClick={nextPage}>&#8658;</div>
+            <div className={unit2Styles['page-nav-container']}>
+                <div className={`${pageIndex > 0 ? unit2Styles['page-nav-button'] : unit2Styles['hidden']}`} onClick={previousPage}><i class="fa-solid fa-circle-left"></i></div>
+                {pageIndex === (pages.length - 1) && <button className={unit2Styles['page-quiz-button']} onClick={props.togglePage}>Ready?</button>}
+                <div className={`${pageIndex < (pages.length - 1) ? unit2Styles['page-nav-button'] : unit2Styles['hidden']}`} onClick={nextPage}><i class="fa-solid fa-circle-right"></i></div>
             </div>
         </div>
     );

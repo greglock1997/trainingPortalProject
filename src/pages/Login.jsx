@@ -2,13 +2,33 @@ import React from 'react'
 import axios from 'axios';
 import { useState, useEffect } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
+import Cookies from 'js-cookie';
 
 export default function Login({ setIsLoggedIn }) {
   // Set default state for username and password
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [message, setMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
   const navigate = useNavigate();
+
+  // Set registration success message
+  useEffect(() => {
+    const registrationStatus = Cookies.get('registrationMessage');
+    setSuccessMessage(registrationStatus);
+    
+    // Remove message after being used
+    Cookies.remove('registrationMessage');
+  }, []);
+
+  // Set access denied message
+  useEffect(() => {
+    const accessMessage = Cookies.get('accessMessage');
+    if (accessMessage) {
+      setErrorMessage(accessMessage);
+      Cookies.remove('accessMessage');
+    }
+  }, []);
 
   // Reset login status
   useEffect(() => {
@@ -34,8 +54,7 @@ export default function Login({ setIsLoggedIn }) {
         setIsLoggedIn(true);
         navigate('/dashboard');
       } else {
-        setMessage("User not recognised");
-        console.log("User not recognised");
+        setErrorMessage("User not recognised");
       }
     } catch (error) {
       console.error('Error: ', error);
@@ -52,7 +71,8 @@ export default function Login({ setIsLoggedIn }) {
           <button type="submit">Login</button>
         </form>
         <button className="login-form-register-button" onClick={() => navigate('/register')}>Register</button>
-        {message && <div className="login-message-container">{message}</div>}
+        {errorMessage && <div className="login-error-message-container">{errorMessage}</div>}
+        {successMessage && <div className="login-success-message-container">{successMessage}</div>}
       </div>
     </div>
   )

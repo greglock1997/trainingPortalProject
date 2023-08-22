@@ -2,7 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import Message from '../components/Message.jsx'
+import Cookies from 'js-cookie';
 
 export default function Register() {
   // Set default message
@@ -54,6 +54,7 @@ export default function Register() {
         const status = response.data.status;
         if (status === 200) {
           setIsRegistered(true);
+          Cookies.set('registrationMessage', 'User registered successfully');
         } else if (status === 409){
           setMessage(response.data.message);
         } else {

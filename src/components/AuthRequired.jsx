@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { Outlet, Navigate } from "react-router-dom"
 import axios from "axios";
+import Cookies from 'js-cookie';
 
 export default function AuthRequired() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -22,6 +23,7 @@ export default function AuthRequired() {
     }
 
     if (!isLoggedIn) {
+        Cookies.set('accessMessage', 'Please login');
         return <Navigate to="/login" />
     }
 

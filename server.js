@@ -10,7 +10,6 @@ const cookieParser = require('cookie-parser');
 
 // Database models
 const User = require('./server/models/User.js');
-const userData = require('./server/models/UserData.js');
 const UserData = require('./server/models/UserData.js');
 
 // Set express to app for quick use
@@ -25,13 +24,6 @@ mongoose.connect('mongodb://localhost:27017/testDataBase01', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
-
-/*
-mongoose.connect('mongodb://localhost:27017/myDatabase', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
-*/
 
 const db = mongoose.connection;
 

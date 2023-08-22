@@ -20,10 +20,14 @@ export default function Dashboard() {
     }, []);
 
     const isCompleted = (unitNumber)  => {
-        if (completedUnits.includes(unitNumber)) {
-            return 'unit-link-completed';
+        if (unitNumber === 1 || completedUnits.includes(unitNumber - 1)) {
+            if (completedUnits.includes(unitNumber)) {
+                return 'unit-link-completed';
+            } else {
+                return 'unit-link'
+            }
         } else {
-            return 'unit-link'
+            return 'unit-link-locked';
         }
     };
 
