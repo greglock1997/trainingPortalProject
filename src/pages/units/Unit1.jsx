@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import unit2Styles from '../../assets/styles/units/unit1.module.css';
+import unit1Styles from '../../assets/styles/units/unit1.module.css';
 
 const pages = [
     (

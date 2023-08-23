@@ -7,6 +7,10 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const cookieParser = require('cookie-parser');
+const nodemailer = require('nodemailer');
+
+// Config file
+const config = require('./config');
 
 // Database models
 const User = require('./server/models/User.js');
@@ -89,6 +93,39 @@ app.post('/logout', (req, res) => {
 app.get('/check-auth', (req, res) => {
   const isLoggedIn = !!req.cookies.user;
   res.json({ isLoggedIn });
+});
+
+// Email authentification
+app.post('/signup-email', (req, res) => {
+  // Create transporter using outlook
+  const transporter = nodemailer.createTransport({
+    host: 'smtp.office365.com',
+    port: 587,
+    secure: false,
+    auth: {
+      user: config.email.user,
+      pass: config.email.password
+    }
+  })
+
+  // Send confirmation email
+  const mailOptions = {
+    from: 'email',
+    to: newUser.email,
+    subject: 'Welcome to our website',
+    text: 'Thanks for signing up'
+  }
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.log('Error sending email:', error);
+    } else {
+      console.log('Email send:', info.response);
+    }
+  });
+
+  // Send response to client
+  res.send('Signup successfull');
 });
 
 // Register route
