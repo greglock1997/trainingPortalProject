@@ -1,0 +1,55 @@
+.register-container {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Maven Pro', sans-serif;
+    background-color: #FFFFFF;
+    background-image: url("../src/assets/images/background-blur.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.register-container img {
+    width: 500px;
+}
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.register-form input {
+    box-sizing: border-box;
+    width: 300px;
+    padding: 20px;
+    margin-bottom: 1rem;
+    border: none;
+    border-bottom: 2px solid rgba(0,0,0,0);
+    outline: none;
+}
+
+.register-form input:focus {
+    box-sizing: border-box;
+    border-bottom: 2px solid #2E549E;
+    color: #2E549E;
+    
+}
+
+.register-form button {
+    width: 300px;
+    padding: 20px;
+    border: none;
+    background-color: #2E549E;
+    color: #FFFFFF;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.register-form button:hover {
+    background-color: #4A6FAE;
+}

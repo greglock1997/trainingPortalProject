@@ -96,64 +96,62 @@ app.get('/check-auth', (req, res) => {
 });
 
 // Email authentification
-app.post('/signup-email', (req, res) => {
-  // Create transporter using outlook
-  const transporter = nodemailer.createTransport({
-    host: 'smtp.office365.com',
-    port: 587,
-    secure: false,
-    auth: {
-      user: config.email.user,
-      pass: config.email.password
-    }
-  })
+app.post('/signup-email', async (req, res) => {
+    // Create transporter using outlook
+    const transporter = nodemailer.createTransport({
+      host: 'smtp.office365.com',
+      port: 587,
+      secure: false,
+      auth: {
+        user: config.email.user,
+        pass: config.email.password
+      }
+    });
 
-  // Send confirmation email
-  const mailOptions = {
-    from: 'email',
-    to: newUser.email,
-    subject: 'Welcome to our website',
-    text: 'Thanks for signing up'
+    // Extract info
+    const { email, confirmationCode } = req.body;
+
+    // Send confirmation email
+    const mailOptions = {
+      from: 'greglock1997@outlook.com',
+      to: email,
+      subject: 'Signup Confirmation Code',
+      text: confirmationCode.toString()
+    }
+
+    await transporter.sendMail(mailOptions);
+    console.log("Email sent")
+
+});
+
+// Check user is already registered
+app.post('/check-user', async (req, res) => {
+  const { username } = await req.body;
+
+  // Find user in database
+  const registeredUser = await User.findOne({ username });
+
+  if (registeredUser) {
+    res.json({ status: 409});
+  } else {
+    res.json({ status: 200});
   }
-
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      console.log('Error sending email:', error);
-    } else {
-      console.log('Email send:', info.response);
-    }
-  });
-
-  // Send response to client
-  res.send('Signup successfull');
 });
 
 // Register route
-app.post('/register', async (req, res) => {
+app.post('/register-user', async (req, res) => {
   const { username, password } = req.body;
 
-  // Check to see if user is already present in database
-  const registeredUser = await User.findOne({ username });
+  //  Hash password
+  const hashedPassword = await bcrypt.hash(password, 10);
+  const newUser = new User({ username, password: hashedPassword });
+  await newUser.save();
 
-  try {
-    if (registeredUser) {
-      console.log("user already registered");
-      return res.json({ status: 409, message: 'User already registered' });
-    }
+  // Create blank user data
+  const newUserData = new UserData({ username, unitsCompleted: [] });
+  await newUserData.save();
 
-    //  Hash password
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = new User({ username, password: hashedPassword });
-    await newUser.save();
-
-    // Create blank user data
-    const newUserData = new UserData({ username, unitsCompleted: [] });
-    await newUserData.save();
-
-    res.json({status: 200, message: 'User registered successfully' });
-  } catch(error) {
-    res.json({status: 500, message: 'Error registering user' });
-  }
+  res.json({status: 200, message: 'User registered successfully' });
 });
 
 // Get unit data

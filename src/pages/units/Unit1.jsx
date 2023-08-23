@@ -57,14 +57,14 @@ export default function Unit1(props) {
     }
 
     return (
-        <div className={unit2Styles['article-container']}>
-            <div className={unit2Styles['page-container']}>
+        <div className={unit1Styles['article-container']}>
+            <div className={unit1Styles['page-container']}>
                 {pages[pageIndex]}
             </div>
-            <div className={unit2Styles['page-nav-container']}>
-                <div className={`${pageIndex > 0 ? unit2Styles['page-nav-button'] : unit2Styles['hidden']}`} onClick={previousPage}><i class="fa-solid fa-circle-left"></i></div>
-                {pageIndex === (pages.length - 1) && <button className={unit2Styles['page-quiz-button']} onClick={props.togglePage}>Ready?</button>}
-                <div className={`${pageIndex < (pages.length - 1) ? unit2Styles['page-nav-button'] : unit2Styles['hidden']}`} onClick={nextPage}><i class="fa-solid fa-circle-right"></i></div>
+            <div className={unit1Styles['page-nav-container']}>
+                <div className={`${pageIndex > 0 ? unit1Styles['page-nav-button'] : unit1Styles['hidden']}`} onClick={previousPage}><i class="fa-solid fa-circle-left"></i></div>
+                {pageIndex === (pages.length - 1) && <button className={unit1Styles['page-quiz-button']} onClick={props.togglePage}>Ready?</button>}
+                <div className={`${pageIndex < (pages.length - 1) ? unit1Styles['page-nav-button'] : unit1Styles['hidden']}`} onClick={nextPage}><i class="fa-solid fa-circle-right"></i></div>
             </div>
         </div>
     );
