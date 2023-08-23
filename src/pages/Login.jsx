@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import Cookies from 'js-cookie';
 
+import loginStyles from '../assets/styles/login.module.css';
+
 export default function Login({ setIsLoggedIn }) {
   // Set default state for username and password
   const [username, setUsername] = useState('');
@@ -62,9 +64,9 @@ export default function Login({ setIsLoggedIn }) {
   };
 
   return (
-    <div className="login-container">
+    <div className='login-container'>
       <img src="../src/assets/images/logo.png" alt="" />
-      <div className="login-form-container">
+      <div className='login-form-container'>
         <form className="login-form" onSubmit={handleLogin}>
           <input type="text" value={username} onChange={handleUsernameChange} placeholder="Username"/>
           <input type="password" value={password} onChange={handlePasswordChange} placeholder="Password"/>

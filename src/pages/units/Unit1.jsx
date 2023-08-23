@@ -30,13 +30,9 @@ const pages = [
     (
         <>
             <h1>Page 3</h1>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-            </p>
-            <p>
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
-            </p>
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/gAnBZFPFXkc" frameborder="0" allowfullscreen></iframe>
+            <video width="560" height="315" controls>
+                <source src="../../src/assets/videos/video1.mp4" type="video/mp4"/>
+            </video>
         </>
     )
 ]
@@ -62,9 +58,16 @@ export default function Unit1(props) {
                 {pages[pageIndex]}
             </div>
             <div className={unit1Styles['page-nav-container']}>
-                <div className={`${pageIndex > 0 ? unit1Styles['page-nav-button'] : unit1Styles['hidden']}`} onClick={previousPage}><i class="fa-solid fa-circle-left"></i></div>
-                {pageIndex === (pages.length - 1) && <button className={unit1Styles['page-quiz-button']} onClick={props.togglePage}>Ready?</button>}
-                <div className={`${pageIndex < (pages.length - 1) ? unit1Styles['page-nav-button'] : unit1Styles['hidden']}`} onClick={nextPage}><i class="fa-solid fa-circle-right"></i></div>
+                {pageIndex === 0 ? (
+                    <div className={unit1Styles['page-return-button']}>Go Back To Dashboard</div>
+                ):(
+                    <div className={`${pageIndex > 0 ? unit1Styles['page-nav-button'] : unit1Styles['hidden']}`} onClick={previousPage}><i class="fa-solid fa-circle-left"></i></div>
+                )}
+                {pageIndex === (pages.length - 1) ? (
+                    <button className={unit1Styles['page-quiz-button']} onClick={props.togglePage}>Ready?</button>
+                ):(
+                    <div className={unit1Styles['page-nav-button']} onClick={nextPage}><i class="fa-solid fa-circle-right"></i></div>
+                )}
             </div>
         </div>
     );

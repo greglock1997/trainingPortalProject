@@ -6,7 +6,6 @@ import Login from './pages/Login.jsx'
 import Register from './pages/Register.jsx'
 import Dashboard from './pages/Dashboard.jsx'
 import Unit from './pages/Unit.jsx'
-import EmailRegister from './pages/EmailRegistration.jsx'
 import AuthRequired from './components/AuthRequired.jsx'
 import axios from 'axios';
 import './index.css'
@@ -51,7 +50,6 @@ export default function App() {
                     <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
                     <Route path="/register" element={<Register />} />
                     <Route path="/logout" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
-                    <Route path="/email-register" element={<EmailRegister />} />
                     <Route element={<AuthRequired isLoggedIn={isLoggedIn} />}>
                         <Route path="/dashboard" element={<Dashboard />} />
                         <Route path="/unit/:unitNumber" element={<Unit />} />
