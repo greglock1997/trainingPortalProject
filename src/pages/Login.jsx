@@ -64,18 +64,18 @@ export default function Login({ setIsLoggedIn }) {
   };
 
   return (
-    <div className='login-container'>
+    <div className={loginStyles['login-container']}>
       <img src="../src/assets/images/logo.png" alt="" />
-      <div className='login-form-container'>
-        <form className="login-form" onSubmit={handleLogin}>
+      <div className={loginStyles['login-form-container']}>
+        <form className={loginStyles['login-form']} onSubmit={handleLogin}>
           <input type="text" value={username} onChange={handleUsernameChange} placeholder="Username"/>
           <input type="password" value={password} onChange={handlePasswordChange} placeholder="Password"/>
           <button type="submit">Login</button>
         </form>
-        <button className="login-form-register-button" onClick={() => navigate('/register')}>Register</button>
-        <button className="reset-password-button" onClick={() => navigate('/reset-password')}>Reset Password</button>
-        {errorMessage && <div className="login-error-message-container">{errorMessage}</div>}
-        {successMessage && <div className="login-success-message-container">{successMessage}</div>}
+        <button className={loginStyles['login-form-register-button']} onClick={() => navigate('/register')}>Register</button>
+        <button className={loginStyles['reset-password-button']} onClick={() => navigate('/reset-password')}>Reset Password</button>
+        {errorMessage && <div className={loginStyles['login-error-message-container']}>{errorMessage}</div>}
+        {successMessage && <div className={loginStyles['login-success-message-container']}>{successMessage}</div>}
       </div>
     </div>
   )

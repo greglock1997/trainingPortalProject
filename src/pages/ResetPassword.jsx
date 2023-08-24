@@ -2,9 +2,8 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import Cookies from 'js-cookie';
 
-import registerStyles from '../assets/styles/register.module.css';
+import resetPasswordStyles from '../assets/styles/resetPassword.module.css';
 
 // Generate random confirmation code
 function generateConfirmationCode() {
@@ -86,7 +85,12 @@ export default function EmailRegister() {
         // Confirmation code page
         } else if (currentPage === 'confirmation') {
             if (confirmationCode == confirmationCodeInput) {
-                axios.post('/reset-password', {email, newPassword});
+                try {
+                    setSuccessMessage('Password changed');
+                    await axios.post('/reset-password', {email, newPassword});
+                } catch (error) {
+                    console.error(error);
+                }
             } else if (confirmationCodeInput === ''){
                 setErrorMessage('Please enter confirmation code');
             } else {
@@ -107,11 +111,11 @@ export default function EmailRegister() {
     }
 
     return (
-        <div className={registerStyles['register-container']}>
+        <div className={resetPasswordStyles['reset-password-container']}>
             <img src="../src/assets/images/logo.png" alt="" />
             {currentPage === 'form' ? (
             <>
-                <form className={registerStyles['register-form']} onSubmit={handleSubmit}>
+                <form className={resetPasswordStyles['reset-password-form']} onSubmit={handleSubmit}>
                     <input
                         minLength={5}
                         maxLength={40} 
@@ -149,13 +153,13 @@ export default function EmailRegister() {
                     />
                     <button>Register</button>
                 </form>
-                <button className={registerStyles['register-login-button']} onClick={() => navigate('/login')}>Login</button>
-                {errorMessage && <div className={registerStyles['register-error-message']}>{errorMessage}</div>}
-                {successMessage && <div className={registerStyles['register-success-message']}>{successMessage}</div>}
+                <button className={resetPasswordStyles['reset-password-login-button']} onClick={() => navigate('/login')}>Login</button>
+                {errorMessage && <div className={resetPasswordStyles['reset-password-error-message']}>{errorMessage}</div>}
+                {successMessage && <div className={resetPasswordStyles['reset-password-success-message']}>{successMessage}</div>}
             </>
             ) : (
                 <>
-                    <div className={registerStyles['register-form']}>
+                    <div className={resetPasswordStyles['reset-password-form']}>
                         <input
                             maxLength={6} 
                             type="string"
@@ -165,10 +169,10 @@ export default function EmailRegister() {
                         />
                         <button onClick={handleSubmit}>Submit</button>
                     </div>
-                    <button className={registerStyles['register-login-button']} onClick={() => resetPage()}>Reset Page</button>
-                    <button className={registerStyles['register-login-button']} onClick={() => navigate('/login')}>Login</button>
-                    {errorMessage && <div className={registerStyles['register-error-message']}>{errorMessage}</div>}
-                    {successMessage && <div className={registerStyles['register-success-message']}>{successMessage}</div>}
+                    <button className={resetPasswordStyles['reset-password-login-button']} onClick={() => resetPage()}>Reset Page</button>
+                    <button className={resetPasswordStyles['reset-password-login-button']} onClick={() => navigate('/login')}>Login</button>
+                    {errorMessage && <div className={resetPasswordStyles['reset-password-error-message']}>{errorMessage}</div>}
+                    {successMessage && <div className={resetPasswordStyles['reset-password-success-message']}>{successMessage}</div>}
                 </>
             )}
         </div>
