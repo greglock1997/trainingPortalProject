@@ -7,6 +7,7 @@ import Register from './pages/Register.jsx'
 import Dashboard from './pages/Dashboard.jsx'
 import Unit from './pages/Unit.jsx'
 import AuthRequired from './components/AuthRequired.jsx'
+import ResetPassword from './pages/ResetPassword.jsx'
 import axios from 'axios';
 import './index.css'
 
@@ -49,6 +50,7 @@ export default function App() {
                 <Routes>
                     <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
                     <Route path="/register" element={<Register />} />
+                    <Route path="/reset-password" element={<ResetPassword />} />
                     <Route path="/logout" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
                     <Route element={<AuthRequired isLoggedIn={isLoggedIn} />}>
                         <Route path="/dashboard" element={<Dashboard />} />

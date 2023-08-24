@@ -70,11 +70,24 @@
     background-color: #4A6FAE;  
 }
 
-.register-message-container {
+.register-error-message {
     width: 300px;
     padding: 20px;
     border: none;
     background-color: #B22222;
+    color: #FFFFFF;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    transition: 0.3s;
+    text-align: center;    
+}
+
+.register-success-message {
+    width: 300px;
+    padding: 20px;
+    border: none;
+    background-color: #51A151;
     color: #FFFFFF;
     border-radius: 5px;
     margin-bottom: 1rem;

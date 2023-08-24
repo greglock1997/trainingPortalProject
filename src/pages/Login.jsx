@@ -73,6 +73,7 @@ export default function Login({ setIsLoggedIn }) {
           <button type="submit">Login</button>
         </form>
         <button className="login-form-register-button" onClick={() => navigate('/register')}>Register</button>
+        <button className="reset-password-button" onClick={() => navigate('/reset-password')}>Reset Password</button>
         {errorMessage && <div className="login-error-message-container">{errorMessage}</div>}
         {successMessage && <div className="login-success-message-container">{successMessage}</div>}
       </div>

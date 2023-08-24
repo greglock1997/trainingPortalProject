@@ -20,8 +20,8 @@ const confirmationCode = generateConfirmationCode();
 export default function EmailRegister() {
     const [email, setEmail] = useState('');
     const [confirmEmail, setConfirmEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
+    const [newPassword, setNewPassword] = useState('');
+    const [confirmNewPassword, setConfirmNewPassword] = useState('');
     const [confirmationCodeInput, setConfirmationCodeInput] = useState('');
     const [currentPage, setCurrentPage] = useState('form')
     const [errorMessage, setErrorMessage] = useState('');
@@ -43,12 +43,12 @@ export default function EmailRegister() {
         setConfirmEmail(event.target.value);
     }
 
-    const handlePasswordChange = (event) => {
-        setPassword(event.target.value); 
+    const handleNewPasswordChange = (event) => {
+        setNewPassword(event.target.value); 
     }
 
-    const handleConfirmPasswordChange = (event) => {
-        setConfirmPassword(event.target.value);
+    const handleConfirmNewPasswordChange = (event) => {
+        setConfirmNewPassword(event.target.value);
     }
 
     const handleConfirmationCodeInputChange = (event) => {
@@ -60,21 +60,25 @@ export default function EmailRegister() {
         if (currentPage === 'form') {
             // Prevents page refresh
             event.preventDefault();
-            if ((email === confirmEmail) && (password === confirmPassword)) {
-                    console.log("Valid details")
-                    const response = axios.post('/check-user', { username: email });
-                    const data = (await response).data;
-                if (data.status === 200) {
+            // Check that entered data is valid
+            if ((email === confirmEmail) && (newPassword === confirmNewPassword)) {
+                // Send request to check that user exists in database
+                const response = axios.post('/check-user', { username: email });
+                const data = (await response).data;
+                // If user exists
+                if (data.status === 409) {
                     setCurrentPage('confirmation');
                     setSuccessMessage('Confirmation code sent');
                     setErrorMessage('');
-                    axios.post('/signup-email', { email, confirmationCode});
-                } else if (data.status === 409) {
-                    setErrorMessage('User already registered');
+                    axios.post('/reset-password-email', { email, confirmationCode });
+                // If user doesn't exist
+                } else if (data.status === 200) {
+                    setErrorMessage('User not registered');
                 }
+            // If details don't match, send error message
             } else if (email === confirmEmail) {
                 setErrorMessage('Passwords do not match')
-            } else if (password === confirmPassword) {
+            } else if (newPassword === confirmNewPassword) {
                 setErrorMessage('Emails do not match')
             } else {
                 setErrorMessage('Emails and passwords do not match')
@@ -82,8 +86,7 @@ export default function EmailRegister() {
         // Confirmation code page
         } else if (currentPage === 'confirmation') {
             if (confirmationCode == confirmationCodeInput) {
-                Cookies.set('registrationMessage', 'User registered successfully');
-                axios.post('/register-user', { username: email, password})
+                axios.post('/reset-password', {email, newPassword});
             } else if (confirmationCodeInput === ''){
                 setErrorMessage('Please enter confirmation code');
             } else {
@@ -98,8 +101,8 @@ export default function EmailRegister() {
         setSuccessMessage('');
         setEmail('');
         setConfirmEmail('');
-        setPassword('');
-        setConfirmPassword('');
+        setNewPassword('');
+        setConfirmNewPassword('');
         setConfirmationCodeInput('');
     }
 
@@ -130,18 +133,18 @@ export default function EmailRegister() {
                         minLength={5}
                         maxLength={20} 
                         type="password" 
-                        value={password} 
-                        onChange={handlePasswordChange} 
-                        placeholder="Password"
+                        value={newPassword} 
+                        onChange={handleNewPasswordChange} 
+                        placeholder="New Password"
                         required
                     />
                     <input
                         minLength={5}
                         maxLength={20} 
                         type="password" 
-                        value={confirmPassword} 
-                        onChange={handleConfirmPasswordChange} 
-                        placeholder="Confirm Passwords"
+                        value={confirmNewPassword} 
+                        onChange={handleConfirmNewPasswordChange} 
+                        placeholder="Confirm New Password"
                         required
                     />
                     <button>Register</button>
@@ -160,9 +163,9 @@ export default function EmailRegister() {
                             onChange={handleConfirmationCodeInputChange} 
                             placeholder="Confirmation Code"
                         />
-                        <button onClick={handleSubmit}>Register</button>
+                        <button onClick={handleSubmit}>Submit</button>
                     </div>
-                    <button className={registerStyles['register-login-button']} onClick={() => resetPage()}>Reset</button>
+                    <button className={registerStyles['register-login-button']} onClick={() => resetPage()}>Reset Page</button>
                     <button className={registerStyles['register-login-button']} onClick={() => navigate('/login')}>Login</button>
                     {errorMessage && <div className={registerStyles['register-error-message']}>{errorMessage}</div>}
                     {successMessage && <div className={registerStyles['register-success-message']}>{successMessage}</div>}

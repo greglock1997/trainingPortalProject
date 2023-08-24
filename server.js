@@ -124,6 +124,35 @@ app.post('/signup-email', async (req, res) => {
 
 });
 
+// Reset password email 
+app.post('/reset-password-email', async (req, res) => {
+  // Create transporter using outlook
+  const transporter = nodemailer.createTransport({
+    host: 'smtp.office365.com',
+    port: 587,
+    secure: false,
+    auth: {
+      user: config.email.user,
+      pass: config.email.password
+    }
+  });
+
+  // Extract info
+  const { email, confirmationCode } = req.body;
+
+  // Send confirmation email
+  const mailOptions = {
+    from: 'greglock1997@outlook.com',
+    to: email,
+    subject: 'Reset Password Code',
+    text: confirmationCode.toString()
+  }
+
+  await transporter.sendMail(mailOptions);
+  console.log("Email sent")
+
+});
+
 // Check user is already registered
 app.post('/check-user', async (req, res) => {
   const { username } = await req.body;
@@ -137,6 +166,20 @@ app.post('/check-user', async (req, res) => {
     res.json({ status: 200});
   }
 });
+
+app.post('/reset-password', async (req, res) => {
+  const { email, newPassword } = await req.body;
+
+  // Find user
+  const registeredUser = await User.findOne({ username: email });
+
+  // Hash password
+  const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+  // Update password
+  registeredUser.password = hashedPassword;
+  await registeredUser.save();
+})
 
 // Register route
 app.post('/register-user', async (req, res) => {
