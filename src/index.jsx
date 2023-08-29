@@ -15,6 +15,7 @@ import './index.css'
 
 export default function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(false); 
 
     // Update the user's logged in status when loading the application
     useEffect(() => {
@@ -28,6 +29,19 @@ export default function App() {
         }
         fetchLoginStatus();
     });
+
+    // Update the user's admin status when loading the application
+    useEffect(() => {
+        async function fetchAdminStatus() {
+            try {
+                const response = await axios.get('/check-admin');
+                setIsAdmin(response.data.isAdmin);
+            } catch (error) {
+                console.error('Error fetching admin status:', error);
+            }
+        }
+        fetchAdminStatus();
+    })
 
     const logout = async () => {
         try {
@@ -47,6 +61,7 @@ export default function App() {
                         {!isLoggedIn ? <Link to="/register">Register</Link> : ''}
                         {isLoggedIn ? <Link to="/dashboard">Dashboard</Link> : ''}
                         {isLoggedIn ? <Link to="/login" onClick={logout}>Logout</Link> : ''}
+                        {isAdmin ? <Link to="/admin">Admin</Link> : ''}
                     </header>
                 )}
                 <Routes>

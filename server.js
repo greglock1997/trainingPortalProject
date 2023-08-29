@@ -99,18 +99,26 @@ app.get('/check-auth', (req, res) => {
 app.get('/check-admin', async (req, res) => {
   const username = req.cookies.user;
 
-  // First, find current user
-  const currentUser = await User.findOne({ username });
-
-  console.log(currentUser);
-  console.log(currentUser.admin);
-
-  if (currentUser.admin) {
-    console.log("Admin");
-    res.json({ isAdmin: true})
-  } else {
-    console.log("User")
-    res.json({ isAdmin: false})
+  try {
+    // First, find current user
+    const currentUser = await User.findOne({ username });
+    
+    if (currentUser) {
+      console.log(currentUser);
+      console.log(currentUser.admin);
+      if (currentUser.admin) {
+        console.log("Admin");
+        res.json({ isAdmin: true});
+      } else {
+        console.log("User")
+        res.json({ isAdmin: false});
+      }
+    } else {
+      console.log("User not found");
+      res.json({ isAdmin: false });
+    }
+  } catch (error) {
+    console.error('Error checking admin status: ', error);
   }
 })
 
