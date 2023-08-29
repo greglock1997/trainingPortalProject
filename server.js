@@ -102,10 +102,7 @@ app.get('/check-admin', async (req, res) => {
   try {
     // First, find current user
     const currentUser = await User.findOne({ username });
-    
     if (currentUser) {
-      console.log(currentUser);
-      console.log(currentUser.admin);
       if (currentUser.admin) {
         console.log("Admin");
         res.json({ isAdmin: true});
@@ -147,8 +144,6 @@ app.post('/signup-email', async (req, res) => {
     }
 
     await transporter.sendMail(mailOptions);
-    console.log("Email sent")
-
 });
 
 // Reset password email 
@@ -176,8 +171,6 @@ app.post('/reset-password-email', async (req, res) => {
   }
 
   await transporter.sendMail(mailOptions);
-  console.log("Email sent")
-
 });
 
 // Check user is already registered
