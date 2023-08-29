@@ -77,3 +77,22 @@
     transition: 0.5s;
     pointer-events: none;
 }
+
+.progress-bar-container {
+    position: fixed;
+    bottom: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: #2E549E;
+    height: 10px;
+    width: 100%;
+    margin-bottom: 0px;
+}
+
+.progress-bar {
+    height: 10px;
+    background: linear-gradient(to right, #FFA500, #FFD700);
+    width: 0;
+    transition: width 0.5s ease-in-out;
+}
