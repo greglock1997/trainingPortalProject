@@ -15,6 +15,8 @@ import Unit9 from '../pages/units/Unit9.jsx'
 import Question from '../components/Question.jsx'
 import questionData from '../data/questionData'
 
+import unitStyles from '../assets/styles/unit.module.css'
+
 export default function Unit() {
     const {unitNumber} = useParams();
     const [questions, setQuestions] = useState([]);
@@ -100,9 +102,9 @@ export default function Unit() {
 
     return (
         currentPage === 'quiz' ? (
-            <div className="unit-container">
-                <div className="progress-bar-container">
-                    <div className="progress-bar" style={{width: `${window.innerWidth * (questionsAnswered / questions.length )}px`}}></div>
+            <div className={unitStyles['unit-container']}>
+                <div className={unitStyles['progress-bar-container']}>
+                    <div className={unitStyles['progress-bar']} style={{width: `${window.innerWidth * (questionsAnswered / questions.length )}px`}}></div>
                 </div>
                 {questions.map((question, index) => (
                     <Question
@@ -116,13 +118,13 @@ export default function Unit() {
                 ))}
                 {questionsAnswered === questions.length ? (
                     <>
-                        <h2 className="unit-reset-button" onClick={handleResetQuiz}>You Scored {score}/{questions.length}, Try Again?</h2>
-                        <h2 className="unit-reset-button" onClick={togglePage}>Read Again?</h2>
+                        <h2 className={unitStyles['unit-reset-button']} onClick={handleResetQuiz}>You Scored {score}/{questions.length}, Try Again?</h2>
+                        <h2 className={unitStyles['unit-reset-button']} onClick={togglePage}>Read Again?</h2>
                     </>
                 ) : (
                     <>
-                        <h2 className="unit-reset-button" onClick={handleResetQuiz}>Reset Quiz</h2>
-                        <h2 className="unit-reset-button" onClick={togglePage}>Read Again?</h2>
+                        <h2 className={unitStyles['unit-reset-button']} onClick={handleResetQuiz}>Reset Quiz</h2>
+                        <h2 className={unitStyles['unit-reset-button']} onClick={togglePage}>Read Again?</h2>
                     </>
                 )}
             </div>

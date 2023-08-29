@@ -260,6 +260,12 @@ app.post('/save-data', async (req, res) => {
   console.log(userData);
 })
 
+app.get('/get-trainee-data', async (req, res) => {
+  const traineeData = await UserData.find({});
+  console.log(traineeData);
+  res.json({ traineeData });
+})
+
 
 // Route to serve your React app
 app.get('*', (req, res) => {
