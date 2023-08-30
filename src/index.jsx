@@ -16,6 +16,20 @@ import './index.css'
 export default function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isAdmin, setIsAdmin] = useState(false); 
+    const [username, setUsername] = useState('');
+ 
+    // Fetch username
+    useEffect(() => {
+        async function fetchUsername() {
+          try {
+            const response = await axios.get('/check-username');
+            setUsername(response.data.username);
+          } catch (error) {
+            console.error('Error fetching session status', error);
+          }
+        }
+        fetchUsername();
+    });
 
     // Update the user's logged in status when loading the application
     useEffect(() => {
@@ -43,6 +57,7 @@ export default function App() {
         fetchAdminStatus();
     })
 
+    // Logout function
     const logout = async () => {
         try {
             await axios.post('/logout');
@@ -54,16 +69,17 @@ export default function App() {
 
     return (
         <BrowserRouter>
-            <div className="container">
-                {isLoggedIn && (
-                    <header>
-                        {!isLoggedIn ? <Link to="/login">Login</Link> : ''}
-                        {!isLoggedIn ? <Link to="/register">Register</Link> : ''}
-                        {isLoggedIn ? <Link to="/dashboard">Dashboard</Link> : ''}
-                        {isLoggedIn ? <Link to="/login" onClick={logout}>Logout</Link> : ''}
-                        {isAdmin ? <Link to="/admin">Admin</Link> : ''}
-                    </header>
-                )}
+            <div className="container">   
+                    {isLoggedIn && (
+                        <header>
+                            <div className="header-nav">  
+                                <Link to="/dashboard">Dashboard</Link>
+                                {isAdmin && <Link to="/admin">Admin</Link>}
+                                <Link to="/login" onClick={logout}>Logout</Link>
+                            </div>
+                            <Link to="#">{username}</Link>
+                        </header>
+                    )}
                 <Routes>
                     <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
                     <Route path="/register" element={<Register />} />

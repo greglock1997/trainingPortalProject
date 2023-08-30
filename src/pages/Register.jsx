@@ -23,7 +23,8 @@ export default function EmailRegister() {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [confirmationCodeInput, setConfirmationCodeInput] = useState('');
-    const [currentPage, setCurrentPage] = useState('form')
+    const [currentPage, setCurrentPage] = useState('form');
+    const [isRegistered, setIsRegistered] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
 
@@ -55,6 +56,15 @@ export default function EmailRegister() {
         setConfirmationCodeInput(event.target.value);
     }
 
+    // Redirects user after registration
+    useEffect(() => {
+        console.log(isRegistered);
+        if (isRegistered) {
+            console.log(isRegistered);
+            navigate('/login');
+        }
+    }, isRegistered);
+
     const handleSubmit = async (event) => {
         // Form page
         if (currentPage === 'form') {
@@ -84,6 +94,12 @@ export default function EmailRegister() {
             if (confirmationCode == confirmationCodeInput) {
                 Cookies.set('registrationMessage', 'User registered successfully');
                 axios.post('/register-user', { username: email, password})
+                    .then(() => {
+                        navigate('/login');
+                    })
+                    .catch(error => {
+                        console.error('Error during registration', error);
+                    })
             } else if (confirmationCodeInput === ''){
                 setErrorMessage('Please enter confirmation code');
             } else {
@@ -159,6 +175,7 @@ export default function EmailRegister() {
                             value={confirmationCodeInput}
                             onChange={handleConfirmationCodeInputChange} 
                             placeholder="Confirmation Code"
+                            required
                         />
                         <button onClick={handleSubmit}>Register</button>
                     </div>

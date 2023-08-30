@@ -24,7 +24,14 @@ app.use(cookieParser());
 app.use(cors());
 
 // Connect to the MongoDB database
+/*
 mongoose.connect('mongodb://localhost:27017/testDataBase01', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+*/
+
+mongoose.connect('mongodb://localhost:27017/testDataBase105', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -186,6 +193,12 @@ app.post('/check-user', async (req, res) => {
     res.json({ status: 200});
   }
 });
+
+// Check username
+app.get('/check-username', async (req, res) => {
+  const username = await req.cookies.user;
+  res.json({ username });
+})
 
 app.post('/reset-password', async (req, res) => {
   const { email, newPassword } = await req.body;

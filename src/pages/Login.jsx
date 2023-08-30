@@ -56,7 +56,7 @@ export default function Login({ setIsLoggedIn }) {
         setIsLoggedIn(true);
         navigate('/dashboard');
       } else {
-        setErrorMessage("User not recognised");
+        setErrorMessage("Incorrect username or password");
       }
     } catch (error) {
       console.error('Error: ', error);
@@ -68,8 +68,8 @@ export default function Login({ setIsLoggedIn }) {
       <img src="../src/assets/images/logo.png" alt="" />
       <div className={loginStyles['login-form-container']}>
         <form className={loginStyles['login-form']} onSubmit={handleLogin}>
-          <input type="text" value={username} onChange={handleUsernameChange} placeholder="Username"/>
-          <input type="password" value={password} onChange={handlePasswordChange} placeholder="Password"/>
+          <input type="text" value={username} onChange={handleUsernameChange} placeholder="Username" required/>
+          <input type="password" value={password} onChange={handlePasswordChange} placeholder="Password" required/>
           <button type="submit">Login</button>
         </form>
         <button className={loginStyles['login-form-register-button']} onClick={() => navigate('/register')}>Register</button>
