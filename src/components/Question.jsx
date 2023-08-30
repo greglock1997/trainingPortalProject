@@ -16,6 +16,8 @@ export default function Question(props) {
         props.onAnswer();
         if (index === props.question.correctAnswer) {
             props.onCorrectAnswer();
+        } else {
+            props.onIncorrectAnswer();
         }
     };
     

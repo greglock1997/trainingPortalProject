@@ -20,7 +20,8 @@ import unitStyles from '../assets/styles/unit.module.css'
 export default function Unit() {
     const {unitNumber} = useParams();
     const [questions, setQuestions] = useState([]);
-    const [questionsAnswered, setQuestionsAnswered] = useState(0);
+    const [correctlyAnsweredQuestions, setCorrectlyAnsweredQuestions] = useState([]);
+    const [noOfQuestionsAnswered, setNoOfQuestionsAnswered] = useState(0);
     const [score, setScore] = useState(0);
     const [resetAnswers, setResetAnswers] = useState(false);
 
@@ -51,12 +52,28 @@ export default function Unit() {
     const UnitComponent = unitComponents[unitNumber - 1]
 
     const handleAnswer = () => {
-        setQuestionsAnswered(questionsAnswered + 1);
+        setNoOfQuestionsAnswered(noOfQuestionsAnswered + 1);
     }
 
-    const handleCorrectAnswer = () => {
+    // Tracks which questions have been answered correctly
+    const handleCorrectAnswer = (questionNumber) => {
         setScore(score + 1);
+        setCorrectlyAnsweredQuestions((prevCorrectlyAnsweredQuestions) => ({
+            ...prevCorrectlyAnsweredQuestions,
+            [questionNumber]: true
+        }));
+    };
+
+    const handleIncorrectAnswer = (questionNumber) => {
+        setCorrectlyAnsweredQuestions((prevCorrectlyAnsweredQuestions) => ({
+            ...prevCorrectlyAnsweredQuestions,
+            [questionNumber]: false
+        }));
     }
+
+    useEffect(() => {
+        console.log(correctlyAnsweredQuestions);
+    }, [correctlyAnsweredQuestions]);
 
     // Randomise questions
     const shuffleArray = (array) => {
@@ -70,7 +87,7 @@ export default function Unit() {
       
     // Reset quiz
     const handleResetQuiz = () => {
-        setQuestionsAnswered(0);
+        setNoOfQuestionsAnswered(0);
         setScore(0);
         setResetAnswers(!resetAnswers);
         scroll.scrollToTop({
@@ -86,6 +103,7 @@ export default function Unit() {
         }
     }, [resetAnswers]);
 
+    // Shuffle question data
     useEffect(() => {
         if (questionData) {
             setQuestions(shuffleArray(questionData[unitNumber]));
@@ -95,16 +113,16 @@ export default function Unit() {
     }, [unitNumber]);
 
     useEffect(() => {
-        if ((questionsAnswered === questions.length) && (questions.length > 0) && (score === questions.length)) {
+        if ((noOfQuestionsAnswered === questions.length) && (questions.length > 0) && (score === questions.length)) {
             axios.post('/save-data', {unitNumber});
         }
-    }, [questionsAnswered]);
+    }, [noOfQuestionsAnswered]);
 
     return (
         currentPage === 'quiz' ? (
             <div className={unitStyles['unit-container']}>
                 <div className={unitStyles['progress-bar-container']}>
-                    <div className={unitStyles['progress-bar']} style={{width: `${window.innerWidth * (questionsAnswered / questions.length )}px`}}></div>
+                    <div className={unitStyles['progress-bar']} style={{width: `${window.innerWidth * (noOfQuestionsAnswered / questions.length )}px`}}></div>
                 </div>
                 {questions.map((question, index) => (
                     <Question
@@ -112,11 +130,12 @@ export default function Unit() {
                         questionNumber={index + 1}
                         question={question} 
                         onAnswer={handleAnswer}
-                        onCorrectAnswer={handleCorrectAnswer}
+                        onCorrectAnswer={() => handleCorrectAnswer(index + 1)}
+                        onIncorrectAnswer={() => handleIncorrectAnswer(index + 1)}
                         resetAnswers={resetAnswers}
                     />
                 ))}
-                {questionsAnswered === questions.length ? (
+                {noOfQuestionsAnswered === questions.length ? (
                     <>
                         <h2 className={unitStyles['unit-reset-button']} onClick={handleResetQuiz}>You Scored {score}/{questions.length}, Try Again?</h2>
                         <h2 className={unitStyles['unit-reset-button']} onClick={togglePage}>Read Again?</h2>
