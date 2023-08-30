@@ -56,20 +56,20 @@ export default function Unit() {
     }
 
     // Tracks which questions have been answered correctly
-    const handleCorrectAnswer = (questionNumber) => {
+    const handleCorrectAnswer = (questionId) => {
         setScore(score + 1);
         setCorrectlyAnsweredQuestions((prevCorrectlyAnsweredQuestions) => ({
             ...prevCorrectlyAnsweredQuestions,
-            [questionNumber]: true
+            [questionId]: true
         }));
     };
 
-    const handleIncorrectAnswer = (questionNumber) => {
+    const handleIncorrectAnswer = (questionId) => {
         setCorrectlyAnsweredQuestions((prevCorrectlyAnsweredQuestions) => ({
             ...prevCorrectlyAnsweredQuestions,
-            [questionNumber]: false
+            [questionId]: false
         }));
-    }
+    };
 
     useEffect(() => {
         console.log(correctlyAnsweredQuestions);
@@ -114,7 +114,18 @@ export default function Unit() {
 
     useEffect(() => {
         if ((noOfQuestionsAnswered === questions.length) && (questions.length > 0) && (score === questions.length)) {
-            axios.post('/save-data', {unitNumber});
+            console.log(correctlyAnsweredQuestions);
+
+            // Convert object into an array of objects
+            const answeredQuestionsArray = Object.keys(correctlyAnsweredQuestions).map(questionKey => ({
+                questionId: questionKey,
+                correctlyAnswered: correctlyAnsweredQuestions[questionKey]
+            }));
+
+            axios.post('/save-data', {
+                unitNumber,
+                correctlyAnsweredQuestions: answeredQuestionsArray
+            });
         }
     }, [noOfQuestionsAnswered]);
 
@@ -126,12 +137,12 @@ export default function Unit() {
                 </div>
                 {questions.map((question, index) => (
                     <Question
-                        key={index}
+                        key={question.id}
                         questionNumber={index + 1}
                         question={question} 
                         onAnswer={handleAnswer}
-                        onCorrectAnswer={() => handleCorrectAnswer(index + 1)}
-                        onIncorrectAnswer={() => handleIncorrectAnswer(index + 1)}
+                        onCorrectAnswer={() => handleCorrectAnswer(question.id)}
+                        onIncorrectAnswer={() => handleIncorrectAnswer(question.id)}
                         resetAnswers={resetAnswers}
                     />
                 ))}

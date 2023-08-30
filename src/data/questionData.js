@@ -1,6 +1,7 @@
 const questionData = {
     1: [
         {   
+            id: '1-1',
             question: "U1Q1",
             answers: [
                 "1",
@@ -11,6 +12,7 @@ const questionData = {
             correctAnswer: 0
         },
         {   
+            id: '1-2',
             question: "U1Q2",
             answers: [
                 "1",
@@ -21,6 +23,7 @@ const questionData = {
             correctAnswer: 3
         },
         {
+            id: '1-3',
             question: "U1Q3",
             answers: [
                 "1",
@@ -31,6 +34,7 @@ const questionData = {
             correctAnswer: 2
         },
         {
+            id: '1-4',
             question: "U1Q4",
             answers: [
                 "1",
@@ -43,6 +47,7 @@ const questionData = {
     ],
     2: [
         {
+            id: '2-1',
             question: "Which of the following is Ofgem not responsible for?",
             answers: [
                 "Setting safety standards for electricty",
@@ -53,6 +58,7 @@ const questionData = {
             correctAnswer: 0
         },
         {
+            id: '2-2',
             question: "Which of these is an example of a renewable energy source?",
             answers: [
                 "Nuclear",
@@ -63,6 +69,7 @@ const questionData = {
             correctAnswer: 1
         },
         {
+            id: '2-3',
             question: "Why should a customer choose Outfox The Market?",
             answers: [
                 "Rated #1 for customer service in the 'Which?' 2020 customer survey",
@@ -73,6 +80,7 @@ const questionData = {
             correctAnswer: 3
         },
         {
+            id: '2-4',
             question: "Why does renewable energy usually cost more for suppliers to provide to their customers?",
             answers: [
                 "Renewable energy sources are less common",
@@ -85,6 +93,7 @@ const questionData = {
     ],
     3: [
         {
+            id: '3-1',
             question: "U3Q1",
             answers: [
                 "1",
@@ -95,6 +104,7 @@ const questionData = {
             correctAnswer: 0
         },
         {
+            id: '3-2',
             question: "U3Q2",
             answers: [
                 "1",
@@ -105,6 +115,7 @@ const questionData = {
             correctAnswer: 0
         },
         {
+            id: '3-3',
             question: "U3Q3",
             answers: [
                 "1",
@@ -115,6 +126,7 @@ const questionData = {
             correctAnswer: 0
         },
         {
+            id: '3-4',
             question: "U3Q4",
             answers: [
                 "1",
@@ -127,6 +139,7 @@ const questionData = {
     ],
     4: [
         {
+            id: '4-1',
             question: "What does EPG stand for?",
             answers: [
                 "Electrictity Production Grid",
@@ -137,6 +150,7 @@ const questionData = {
             correctAnswer: 3
         },
         {
+            id: '4-2',
             question: "Who does the EPG apply to?",
             answers: [
                 "All househoulds in Great Britain",
@@ -147,6 +161,7 @@ const questionData = {
             correctAnswer: 2
         },
         {
+            id: '4-3',
             question: "What is the maximum charge for electricty for customers paying by Direct Debit under the EPG?",
             answers: [
                 "34.0p/kWh",
@@ -157,6 +172,7 @@ const questionData = {
             correctAnswer: 0
         },
         {
+            id: '4-4',
             question: "What is the maximum charge for gas for customers paying on receipt of their bill under the EPG?",
             answers: [
                 "15.7p/kWh",
@@ -167,6 +183,7 @@ const questionData = {
             correctAnswer: 2
         },
         {
+            id: '4-5',
             question: "During which time period will the EPG be in effect?",
             answers: [
                 "From November 1st, 2022 to June 30th, 2023",
@@ -177,6 +194,7 @@ const questionData = {
             correctAnswer: 1
         },
         {
+            id: '4-6',
             question: "According to Ofgem, how much electricity does the average UK household use annually?",
             answers: [
                 "2,900kWh",
@@ -189,6 +207,7 @@ const questionData = {
     ],
     5: [
         {
+            id: '5-1',
             question: "Which of these is a valid unit of gas?",
             answers: [
                 "Kilograms",
@@ -199,6 +218,7 @@ const questionData = {
             correctAnswer: 2
         },
         {
+            id: '5-2',
             question: "What does MPRN stand for?",
             answers: [
                 "Meter Point Access Number",
@@ -209,6 +229,7 @@ const questionData = {
             correctAnswer: 1
         },
         {
+            id: '5-3',
             question: "Who is responsible for the Service Cable in a meter cupboard?",
             answers: [
                 "The Supplier",
@@ -219,6 +240,7 @@ const questionData = {
             correctAnswer: 2
         },
         {
+            id: '5-4',
             question: "Which of these should you NOT do if you smell gas in your home?",
             answers: [
                 "Open windows and doors",
@@ -229,6 +251,7 @@ const questionData = {
             correctAnswer: 3
         },
         {
+            id: '5-5',
             question: "How many digits are there in an MPRN?",
             answers: [
                 "8",
@@ -238,7 +261,8 @@ const questionData = {
             ],
             correctAnswer: 2
         },
-        {   
+        {
+            id: '5-6',   
             question: "Which of these is NOT insider a meter cupboard?",
             answers: [
                 "Service cable",
@@ -251,6 +275,7 @@ const questionData = {
     ],
     6: [
         {
+            id: '6-1',
             question: "U6Q1",
             answers: [
                 "1",
@@ -261,6 +286,7 @@ const questionData = {
             correctAnswer: 0
         },
         {
+            id: '6-2',
             question: "U6Q2",
             answers: [
                 "1",
@@ -271,6 +297,7 @@ const questionData = {
             correctAnswer: 0
         },
         {
+            id: '6-3',
             question: "U6Q3",
             answers: [
                 "1",
@@ -281,6 +308,7 @@ const questionData = {
             correctAnswer: 0
         },
         {
+            id: '6-4',
             question: "U6Q4",
             answers: [
                 "1",
@@ -293,6 +321,7 @@ const questionData = {
     ],
     7: [
         {   
+            id: '7-1',
             question: "U1Q1",
             answers: [
                 "1",
@@ -302,7 +331,8 @@ const questionData = {
             ],
             correctAnswer: 0
         },
-        {   
+        {
+            id: '7-2',   
             question: "U1Q2",
             answers: [
                 "1",
@@ -313,6 +343,7 @@ const questionData = {
             correctAnswer: 3
         },
         {
+            id: '7-3',
             question: "U1Q3",
             answers: [
                 "1",
@@ -323,6 +354,7 @@ const questionData = {
             correctAnswer: 2
         },
         {
+            id: '7-4',
             question: "U1Q4",
             answers: [
                 "1",
@@ -335,6 +367,7 @@ const questionData = {
     ],
     8: [
         {
+            id: '8-1',
             question: "U2Q1",
             answers: [
                 "1",
@@ -345,6 +378,7 @@ const questionData = {
             correctAnswer: 0
         },
         {
+            id: '8-2',
             question: "U2Q2",
             answers: [
                 "1",
@@ -355,6 +389,7 @@ const questionData = {
             correctAnswer: 0
         },
         {
+            id: '8-3',
             question: "U2Q3",
             answers: [
                 "1",
@@ -365,6 +400,7 @@ const questionData = {
             correctAnswer: 0
         },
         {
+            id: '8-4',
             question: "U2Q4",
             answers: [
                 "1",
@@ -377,6 +413,7 @@ const questionData = {
     ],
     9: [
         {
+            id: '9-1',
             question: "U3Q1",
             answers: [
                 "1",
@@ -387,6 +424,7 @@ const questionData = {
             correctAnswer: 0
         },
         {
+            id: '9-2',
             question: "U3Q2",
             answers: [
                 "1",
@@ -397,6 +435,7 @@ const questionData = {
             correctAnswer: 0
         },
         {
+            id: '9-3',
             question: "U3Q3",
             answers: [
                 "1",
@@ -407,6 +446,7 @@ const questionData = {
             correctAnswer: 0
         },
         {
+            id: '9-4',
             question: "U3Q4",
             answers: [
                 "1",

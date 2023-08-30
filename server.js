@@ -31,7 +31,7 @@ mongoose.connect('mongodb://localhost:27017/testDataBase01', {
 });
 */
 
-mongoose.connect('mongodb://localhost:27017/testDataBase105', {
+mongoose.connect('mongodb://localhost:27017/testDataBase01', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -248,14 +248,13 @@ app.get('/get-data', async (req, res) => {
 app.post('/save-data', async (req, res) => {
   const username = req.cookies.user;
   const unitNumber = req.body.unitNumber;
-
-  console.log(unitNumber);
+  const userAnswerData = req.body.correctlyAnsweredQuestions;
 
   const userData = await UserData.findOne({ username });
-
-  console.log(userData);
-  console.log(userData.unitsCompleted);
   
+  console.log("correctlyAnsweredQuestions", req.body.correctlyAnsweredQuestions);
+  console.log("Answer Data", userAnswerData);
+
   const isCompleted = userData.unitsCompleted.some(
     unit => unit.unitId.toString() === unitNumber
   );
@@ -265,12 +264,18 @@ app.post('/save-data', async (req, res) => {
   } else {
     userData.unitsCompleted.push({
       unitId: unitNumber,
-      completedDate: Date.now()
+      completedDate: Date.now(),
+      answeredQuestions: userAnswerData
     });
   }
 
   await userData.save();
-  console.log(userData);
+
+  // Check data
+  const unitIndex = userData.unitsCompleted.findIndex(
+    unit => unit.unitId.toString() === unitNumber
+  );
+  console.log(userData.unitsCompleted[unitIndex].answeredQuestions);
 })
 
 app.get('/get-trainee-data', async (req, res) => {

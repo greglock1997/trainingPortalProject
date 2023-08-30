@@ -1,5 +1,31 @@
 const mongoose = require('mongoose');
 
+const answeredQuestionSchema = new mongoose.Schema({
+    questionId: {
+        type: String,
+        required: true
+    },
+    correctlyAnswered: {
+        type: Boolean,
+        required: true
+    }
+});
+
+const unitCompletedSchema = new mongoose.Schema({
+    unitId: {
+        type: Number,
+        required: true
+    },
+    completedDate: {
+        type: Date,
+        default: Date.now
+    },
+    answeredQuestions: {
+        type: [answeredQuestionSchema],
+        default: []
+    }
+});
+
 const userDataSchema = new mongoose.Schema({
     username: {
         type: String,
@@ -8,17 +34,7 @@ const userDataSchema = new mongoose.Schema({
         trim: true
     },
     unitsCompleted: {
-        type: [
-            {
-                unitId: {
-                    type: Number
-                },
-                completedDate: {
-                    type: Date,
-                    default: Date.now
-                }
-            }
-        ],
+        type: [unitCompletedSchema],
         default: []
     }
 });
