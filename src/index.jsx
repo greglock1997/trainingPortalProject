@@ -10,6 +10,7 @@ import AuthRequired from './components/AuthRequired.jsx'
 import AdminRequired from './components/AdminRequired.jsx'
 import ResetPassword from './pages/ResetPassword.jsx'
 import Admin from './pages/Admin.jsx'
+import Profile from './pages/Profile.jsx'
 import axios from 'axios';
 import './index.css'
 
@@ -90,6 +91,7 @@ export default function App() {
                         <Route path="/unit/:unitNumber" element={<Unit />} />
                         <Route element={<AdminRequired isLoggedIn={isLoggedIn} />}>
                             <Route path="/admin" element={<Admin />} />
+                            <Route path="/profile/:username" element={<Profile />} />
                         </Route>
                     </Route>
                 </Routes>

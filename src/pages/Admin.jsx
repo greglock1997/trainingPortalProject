@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import adminStyles from '../assets/styles/admin.module.css'
 
@@ -30,7 +31,7 @@ export default function Admin() {
                 <tbody>
                     {traineeData.map((user, index) => (
                         <tr key={index}>
-                            <td>{user.username}</td>
+                            <td><Link to={`/profile/${user.username}`}>{user.username}</Link></td>
                             <td>{user.unitsCompleted.length} / 9</td>
                         </tr>
                     ))}

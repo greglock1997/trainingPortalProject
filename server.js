@@ -259,8 +259,13 @@ app.post('/save-data', async (req, res) => {
     unit => unit.unitId.toString() === unitNumber
   );
 
+  const unitIndex = userData.unitsCompleted.findIndex(
+    unit => unit.unitId.toString() === unitNumber
+  );
+
   if (isCompleted) {
-    console.log("unit already completed");
+    userData.unitsCompleted[unitIndex].answeredQuestions = userAnswerData;
+    console.log("Unit data completed for completed unit");
   } else {
     userData.unitsCompleted.push({
       unitId: unitNumber,
@@ -270,12 +275,6 @@ app.post('/save-data', async (req, res) => {
   }
 
   await userData.save();
-
-  // Check data
-  const unitIndex = userData.unitsCompleted.findIndex(
-    unit => unit.unitId.toString() === unitNumber
-  );
-  console.log(userData.unitsCompleted[unitIndex].answeredQuestions);
 })
 
 app.get('/get-trainee-data', async (req, res) => {

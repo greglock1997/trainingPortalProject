@@ -113,7 +113,7 @@ export default function Unit() {
     }, [unitNumber]);
 
     useEffect(() => {
-        if ((noOfQuestionsAnswered === questions.length) && (questions.length > 0) && (score === questions.length)) {
+        if ((noOfQuestionsAnswered === questions.length) && (questions.length > 0)) {
             console.log(correctlyAnsweredQuestions);
 
             // Convert object into an array of objects
