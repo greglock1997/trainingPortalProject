@@ -1,11 +1,30 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import profileStyles from '../assets/styles/profile.module.css'
 
 export default function Profile() {
     const { username } = useParams();
     const [profileData, setProfileData] = useState(null);
+
+    const navigate = useNavigate();
+
+    const handleResetUser = async () => {
+        console.log("Reset user data");
+        axios.post('/reset-user', {username})
+    }
+
+    const handleDeleteUser = async () => {
+        console.log("Delete user data");
+        axios.post('/delete-user', {username})
+            .then(() => {
+                console.log("User deleted");
+                navigate('/login');
+            })
+            .catch(error => {
+                console.error("Error deleting user : ", error)
+            });
+    }
 
     useEffect(() => {
         const fetchProfileData = async () => {
@@ -29,6 +48,10 @@ export default function Profile() {
             {profileData ? (
                 <>
                     <h1 className={profileStyles['profile-title']}>{username}</h1>
+                    <div className={profileStyles['profile-buttons']}>
+                        <button onClick={handleResetUser}>Reset User Data</button>
+                        <button onClick={handleDeleteUser}>Delete User</button>
+                    </div>
                     {profileData.unitsCompleted.map((unit, index) => (
                         <table className={profileStyles['profile-table']}>
                             <thead>

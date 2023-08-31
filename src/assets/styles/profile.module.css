@@ -42,3 +42,22 @@
     color: #FFFFFF;
     text-decoration: none;
 }
+
+.profile-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 400px;
+    margin-bottom: 40px;
+}
+
+.profile-buttons button {
+    color: #FFFFFF;
+    background-color: #B22222;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 20px;
+    cursor: pointer;
+}

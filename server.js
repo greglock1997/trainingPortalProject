@@ -296,6 +296,18 @@ app.get('/get-trainee-data', async (req, res) => {
   res.json({ traineeData });
 })
 
+app.post('/delete-user', async (req, res) => {
+  const username = req.body.username;
+
+  console.log("Deleting...")
+  try {
+    await User.findOneAndDelete({ username });
+    await UserData.findOneAndDelete({ username });
+    console.log("User : ", username, " deleted");
+  } catch (error) {
+    console.error('Error deleting user : ', error);
+  }
+})
 
 // Route to serve your React app
 app.get('*', (req, res) => {
