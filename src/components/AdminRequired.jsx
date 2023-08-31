@@ -24,7 +24,7 @@ export default function AdminRequired() {
 
     if (!isAdmin) {
         Cookies.set('accessMessage', 'Please login as admin');
-        return <Navigate to="/login" />;
+        return <Navigate to="/dashboard" />;
     }
 
     return <Outlet />;
