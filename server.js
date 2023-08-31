@@ -307,7 +307,21 @@ app.post('/delete-user', async (req, res) => {
   } catch (error) {
     console.error('Error deleting user : ', error);
   }
-})
+});
+
+app.post('/reset-user', async (req, res) => {
+  const username = req.body.username;
+
+  try {
+    const updatedData = await UserData.findOneAndUpdate(
+      { username },
+      { unitsCompleted: []}
+    )
+    console.log("User data reset successfully : ", updatedData);
+  } catch (error) {
+    console.log("Error resetting user data : ", error);
+  };
+});
 
 // Route to serve your React app
 app.get('*', (req, res) => {

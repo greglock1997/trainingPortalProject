@@ -24,7 +24,7 @@ export default function Profile() {
             .catch(error => {
                 console.error("Error deleting user : ", error)
             });
-    }
+    };
 
     useEffect(() => {
         const fetchProfileData = async () => {
