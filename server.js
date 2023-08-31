@@ -244,6 +244,19 @@ app.get('/get-data', async (req, res) => {
   }
 });
 
+// Get profile data
+app.get('/get-profile-data/:username', async (req, res) => {
+  const username = req.params.username;
+
+  try {
+    const profileData = await UserData.findOne({ username });
+    console.log(profileData);
+    res.json(profileData)
+  } catch (error) {
+    console.error('Error fetching user data : ', error);
+  }
+});
+
 // Save data
 app.post('/save-data', async (req, res) => {
   const username = req.cookies.user;
