@@ -17,9 +17,12 @@ export default function Dashboard() {
                 console.error('Error fetching completed units: ', error);
             }
         }
-
         fetchData();
     }, []);
+
+    useEffect(() => {
+        console.log("CompletedUnits : ", completedUnits);
+    }, completedUnits);
 
     const isCompleted = (unitNumber)  => {
         if (unitNumber === 1 || completedUnits.includes(unitNumber - 1)) {

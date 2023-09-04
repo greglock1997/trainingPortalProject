@@ -103,6 +103,7 @@ app.get('/check-auth', (req, res) => {
 });
 
 // Check to see if user is logged in as admin
+
 app.get('/check-admin', async (req, res) => {
   const username = req.cookies.user;
 
