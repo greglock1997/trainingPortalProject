@@ -104,6 +104,146 @@ function Question2() {
     )
 }
 
+function Question3() {
+    const [answerInput, setAnswerInput] = useState('');
+    const [answerCorrect, setAnswerCorrect] = useState('');
+
+    const handleInputChange = (event) => {
+        setAnswerInput(event.target.value);
+    };
+
+    const checkAnswer = () => {
+        if (answerInput === '823') {
+            setAnswerCorrect(true);
+        } else if (answerInput === '') {
+            setAnswerCorrect('');
+        } else {
+            setAnswerCorrect(false);
+        };
+    };
+
+    return (
+        <div className={unitRedesignStyles['page-9']}>
+            <h1>Question 3</h1>
+            <p>
+                In this scenario the customer has been receiving their energy from this supplier
+                for one year. The customer has consumed 5000kWh of electricity during this time.
+                The standing charge of the supplier is 20p/day and the unit rate is 15p/kWh. The 5%
+                VAT rate is already included in these rates. Calulate the customer's total cost for
+                the year in £ and enter it into the box below.
+            </p>
+            <input 
+                type="text" 
+                placeholder='Answer'
+                value={answerInput}
+                onChange={handleInputChange}
+            />
+            {answerCorrect === true ? (
+                <button className={unitRedesignStyles['button-correct']}>Correct!</button>
+            ) : answerCorrect === false ? (
+                <button className={unitRedesignStyles['button-incorrect']} onClick={checkAnswer}>Incorrect, try again</button>
+            ) : (
+                <button className={unitRedesignStyles['button-neutral']} onClick={checkAnswer}>
+                    Check Answer
+                </button>
+            )}
+        </div>
+    )    
+}
+
+function Question4() {
+    const [answerInput, setAnswerInput] = useState('');
+    const [answerCorrect, setAnswerCorrect] = useState('');
+
+    const handleInputChange = (event) => {
+        setAnswerInput(event.target.value);
+    };
+
+    const checkAnswer = () => {
+        if (answerInput === '1584.33') {
+            setAnswerCorrect(true);
+        } else if (answerInput === '') {
+            setAnswerCorrect('');
+        } else {
+            setAnswerCorrect(false);
+        };
+    };
+
+    return (
+        <div className={unitRedesignStyles['page-10']}>
+            <h1>Question 4</h1>
+            <p>
+                This customer has also been receiving energy from their supplier for one year. They have
+                consumed 6500kWh of electricity and 13050kWh of gas. This supplier's standing charge is 22.1p/day
+                for electricty and 23.4p/day for gas. The unit rate for electricity is 16.8p/kWh and 2.5p/kWh for
+                gas. All rates include the 5% VAT rate. Calculate how much this customer spent in one year.
+            </p>
+            <input 
+                type="text" 
+                placeholder='Answer'
+                value={answerInput}
+                onChange={handleInputChange}
+            />
+            {answerCorrect === true ? (
+                <button className={unitRedesignStyles['button-correct']}>Correct!</button>
+            ) : answerCorrect === false ? (
+                <button className={unitRedesignStyles['button-incorrect']} onClick={checkAnswer}>Incorrect, try again</button>
+            ) : (
+                <button className={unitRedesignStyles['button-neutral']} onClick={checkAnswer}>
+                    Check Answer
+                </button>
+            )}
+        </div>
+    )    
+}
+
+function Question5() {
+    const [answerInput, setAnswerInput] = useState('');
+    const [answerCorrect, setAnswerCorrect] = useState('');
+
+    const handleInputChange = (event) => {
+        setAnswerInput(event.target.value);
+    };
+
+    const checkAnswer = () => {
+        if (answerInput === '1272.75') {
+            setAnswerCorrect(true);
+        } else if (answerInput === '') {
+            setAnswerCorrect('');
+        } else {
+            setAnswerCorrect(false);
+        };
+    };
+
+    return (
+        <div className={unitRedesignStyles['page-11']}>
+            <h1>Question 5</h1>
+            <p>
+                This time, a customer has been receiving energy from their supplier for 239 days.
+                They've consumed 5793kWh of electricity and 9847kWh of gas. The supplier's electricty
+                standing charge is 17.17706p/day with a unit rate of 14.51791p/kWh. For gas the standing
+                charge is 19.48624p/day and the unit rate is 2.879p/kWh. The rates above do not include
+                the 5% VAT. How much does this customer spend in 239 days?
+            </p>
+            <input 
+                type="text" 
+                placeholder='Answer'
+                value={answerInput}
+                onChange={handleInputChange}
+            />
+            {answerCorrect === true ? (
+                <button className={unitRedesignStyles['button-correct']}>Correct!</button>
+            ) : answerCorrect === false ? (
+                <button className={unitRedesignStyles['button-incorrect']} onClick={checkAnswer}>Incorrect, try again</button>
+            ) : (
+                <button className={unitRedesignStyles['button-neutral']} onClick={checkAnswer}>
+                    Check Answer
+                </button>
+            )}
+        </div>
+    )    
+}    
+
 export default function UnitRedesign() {
     const [pageNumber, setPageNumber] = useState(0);
     const [dashboardPageNumber, setDashboardPageNumber] = useState(0);
@@ -183,10 +323,81 @@ export default function UnitRedesign() {
             </div>
         ),
         (
-           <Question1 /> 
+            <Question1 /> 
         ),
         (
             <Question2 />
+        ),
+        (
+            <div className={unitRedesignStyles['page-8']}>
+                <div>
+                    <h1>Measure of gas and electricity units</h1>
+                    <p>
+                        <b>Electrictity</b> meters record energy consumed in kilowatt hours while <b>gas</b> meters
+                        record the volume of the gas consumed in cubic feet in the case of older meters or cubic meters
+                        for newer models.
+                    </p>
+                    <p>
+                        The calculations used to generate gas bills are prescribed in <b><i>The Gas (Calculation of Thermal Energy)
+                        Regulations (SI 1996/439).</i></b> The Office of Gas and Electricity Markets it the energy regulator and has
+                        responsibility for these refulations. Under this governence suppliers bill customers in kilowatt hours for both
+                        gas and electricity.
+                    </p>
+                    <p>To convert the gas units from cubic meters to kilowatt hours we use this formula : </p>
+                    <b>
+                        <ul>
+                            <li>Units Consumed (cubic meters)</li>
+                            <li>x Volume Conversion Factor (1.0 for cubic meters)</li>
+                            <li>x Volume Correction (1.02264 to account for temperature and pressure)</li>
+                            <li>x Calorific Value (39.5 Joules per m³)</li>
+                            <li>÷ 3600 (3600 seconds in each hour)</li>
+                            <li>x 1000 (Number of Joules in a kilowatt hour)</li>
+                            <li>= Number of kilowatt hours</li>
+                        </ul>
+                    </b>
+                </div>
+                <img src="src\assets\images\Picture2.png" alt="" />
+            </div>
+        ),
+        (
+            <Question3 />
+        ),
+        (
+            <Question4 />
+        ),
+        (
+            <Question5 />
+        ),
+        (
+            <div className={unitRedesignStyles['page-12']}>
+                <h1>How electricity usage is calculated</h1>
+                <p>
+                    Electricity usage is calculated from either <b>actual</b> meter readings
+                    or <b>estimated</b> meter readings. Here is an example of some readings below : 
+                </p>
+                <table>
+                    <tr>
+                        <th>Date</th>
+                        <th>Meter Readings</th>
+                    </tr>
+                    <tr>
+                        <td>2023-09-01</td>
+                        <td>1250 kWh</td>
+                    </tr>
+                    <tr>
+                        <td>2023-09-02</td>
+                        <td>1260 kWh</td>
+                    </tr>
+                    <tr>
+                        <td>2023-09-03</td>
+                        <td>1270 kWh</td>
+                    </tr>
+                    <tr>
+                        <td>2023-09-04</td>
+                        <td>1277 kWh</td>
+                    </tr>
+                </table>
+            </div>            
         )
     ];
 
@@ -258,7 +469,7 @@ export default function UnitRedesign() {
                             <h3>Section 3 : Energy Bills</h3>
                             <h5>17 min</h5>
                         </div>
-                        <div className={unitRedesignStyles['unit-main-section']}>
+                        <div className={unitRedesignStyles['unit-main-section-selected']}>
                             <h3>Section 4 : Energy Price Gaurantee</h3>
                             <h5>11 min</h5>
                         </div>
