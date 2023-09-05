@@ -162,3 +162,129 @@
 .page-3 img {
     margin-left: 70px;
 }
+
+.page-4 h1 {
+    margin-bottom: 20px;
+}
+
+.page-4 p {
+    max-width: 400px;
+    margin-bottom: 20px;
+}
+
+.page-4 ul {
+    margin-bottom: 20px;
+}
+
+.page-5 h1 {
+    margin-bottom: 20px;
+}
+
+.page-5 p {
+    max-width: 400px;
+    margin-bottom: 20px;
+}
+
+.page-5 ul {
+    max-width: 400px;
+    margin-bottom: 20px;
+}
+
+.page-6 {
+    display: flex;
+    flex-direction: column;
+}
+
+.page-6 h1 {
+    margin-bottom: 20px;
+}
+
+.page-6 p {
+    max-width: 400px;
+    margin-bottom: 40px;
+}
+
+
+.page-6 input {
+    padding: 10px;
+    width: 200px;
+    margin-bottom: 20px;
+}
+
+
+.page-6 .button-neutral {
+    padding: 10px;
+    width: 200px;
+    color: #FFFFFF;
+    background-color: #2D2F31;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.page-6 .button-correct {
+    padding: 10px;
+    width: 200px;
+    color: #FFFFFF;
+    background-color: #28C382;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.page-6 .button-incorrect {
+    padding: 10px;
+    width: 200px;
+    color: #FFFFFF;
+    background-color: #B51C15;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.page-7 {
+    display: flex;
+    flex-direction: column;
+}
+
+.page-7 h1 {
+    margin-bottom: 20px;
+}
+
+.page-7 p {
+    max-width: 400px;
+    margin-bottom: 20px;
+}
+
+.page-7 button {
+    padding: 10px;
+    width: 200px;
+    color: #FFFFFF;
+    background-color: #2D2F31;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.page-7 .button-correct {
+    padding: 10px;
+    width: 200px;
+    color: #FFFFFF;
+    background-color: #28C382;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.page-7 .button-incorrect {
+    padding: 10px;
+    width: 200px;
+    color: #FFFFFF;
+    background-color: #B51C15;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    margin-bottom: 10px;
+}

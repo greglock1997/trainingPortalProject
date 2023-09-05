@@ -1,9 +1,112 @@
 import React, { useState, useEffect } from 'react';
 import unitRedesignStyles from '../assets/styles/unit-redesign.module.css';
 
+function Question1() {
+    const [answerInput, setAnswerInput] = useState('');
+    const [answerCorrect, setAnswerCorrect] = useState('');
+
+    const handleInputChange = (event) => {
+        setAnswerInput(event.target.value);
+    };
+
+    const checkAnswer = () => {
+        if (answerInput === '165.51') {
+            setAnswerCorrect(true);
+        } else if (answerInput === '') {
+            setAnswerCorrect('');
+        } else {
+            setAnswerCorrect(false);
+        };
+    };
+
+    return (
+        <div className={unitRedesignStyles['page-6']}>
+            <h1>Question 1</h1>
+            <p>
+                Imagine a customer has been with us for 91 days and our current standing charge is
+                27p/day. The customer has also used 783kwH of energy during this time, our unit rate
+                is 18p/kWh. Calculate the customer's total cost (in £) during this time and enter it into the
+                box below.
+            </p>
+            <input 
+                type="text" 
+                placeholder='Answer'
+                value={answerInput}
+                onChange={handleInputChange}
+            />
+            {answerCorrect === true ? (
+                <button className={unitRedesignStyles['button-correct']}>Correct!</button>
+            ) : answerCorrect === false ? (
+                <button className={unitRedesignStyles['button-incorrect']} onClick={checkAnswer}>Incorrect, try again</button>
+            ) : (
+                <button className={unitRedesignStyles['button-neutral']} onClick={checkAnswer}>
+                    Check Answer
+                </button>
+            )}
+        </div>
+    )
+}
+
+function Question2() {
+    const [selectedAnswer, setSelectedAnswer] = useState(null);
+
+    const correctAnswer = 'kWh';
+
+    const handleAnswerClick = (answer) => {
+        setSelectedAnswer(answer);
+    }
+
+    return (
+        <div className={unitRedesignStyles['page-7']}>
+            <h1>Question 2</h1>
+            <p>Which of these is a common unit for energy usage?</p>
+            <button
+                className={`${
+                    selectedAnswer === 'mWh'
+                        ? (selectedAnswer === correctAnswer ? unitRedesignStyles['button-correct'] : unitRedesignStyles['button-incorrect'])
+                        : ''
+                }`}
+                onClick={() => handleAnswerClick('mWh')}
+            >
+                mWh
+            </button>
+            <button
+                className={`${
+                    selectedAnswer === 'kWh'
+                        ? (selectedAnswer === correctAnswer ? unitRedesignStyles['button-correct'] : unitRedesignStyles['button-incorrect'])
+                        : ''
+                }`}
+                onClick={() => handleAnswerClick('kWh')}
+            >
+                kWh
+            </button>
+            <button
+                className={`${
+                    selectedAnswer === 'gWh'
+                        ? (selectedAnswer === correctAnswer ? unitRedesignStyles['button-correct'] : unitRedesignStyles['button-incorrect'])
+                        : ''
+                }`}
+                onClick={() => handleAnswerClick('gWh')}
+            >
+                gWh
+            </button>
+            <button
+                className={`${
+                    selectedAnswer === 'Wh'
+                        ? (selectedAnswer === correctAnswer ? unitRedesignStyles['button-correct'] : unitRedesignStyles['button-incorrect'])
+                        : ''
+                }`}
+                onClick={() => handleAnswerClick('Wh')}
+            >
+                Wh
+            </button>
+        </div>
+    )
+}
+
 export default function UnitRedesign() {
     const [pageNumber, setPageNumber] = useState(0);
-    const [dashboardPageNumber, setDashboardPageNumber] = useState(1);
+    const [dashboardPageNumber, setDashboardPageNumber] = useState(0);
 
     const pages = [
         (
@@ -42,7 +145,48 @@ export default function UnitRedesign() {
             </div>
         ),
         (
-            <h1>Page 4</h1>
+            <div className={unitRedesignStyles['page-4']}>
+                <h1>Unit rate</h1>
+                <p>The <b>unit rate</b> is the price-per-unit of the gas and electricity you consume in your household. For exmaple, electricity is measured in
+                kilowatt hours (kWh), so a unit rate would be the cost per kWh used. Unit rates can vary depending on several reasons : </p>
+                <ul>
+                    <li>Your location</li>
+                    <li>Your preferred payment method</li>
+                    <li>Your energy tariff</li>
+                </ul>
+                <p>For example, a customer has used 300kWh of electricity and our unit rate is 16.5p/kWh. Using the Price x Quantity forumula
+                    we can calculate their bill. <br /><br /> <b>16.5p x 300kWh = 4950p = £49.50</b>
+                </p>
+            </div>
+        ),
+        (
+            <div className={unitRedesignStyles['page-5']}>
+                <h1>Standing charge</h1>
+                <p>A <b>standing charge</b> is a fixed daily amount that you must pay no matter how much energy you use.
+                It even applies to properties that are empty for part of the year, like a holiday home. The charge coverd the cost
+                of supplying the property with gas and electricity. It can thought of as a line rental for a mobile phone, but with energy instead.
+                These costs include : 
+                </p>
+                <ul>
+                    <li>Using and maintaining the networks, wires and pipes that carry gas and electricity
+                        to customers' homes
+                    </li>
+                    <li>Keeping homes connected to the energy network</li>
+                    <li>Carrying out meter readings</li>
+                    <li>Payment towards government initiatives that help vulnerable households and reduce CO2 emissions</li>
+                </ul>
+                <p>
+                    For example, a customer has been with a supplier for 30 days and the supplier's standing charge
+                    is 21p/day. Using the Price x Quantity formula, <br /> <br /> <b>21p x 30days = 630p = £63</b>
+                </p>
+                <p>Now let's try a quick test</p>
+            </div>
+        ),
+        (
+           <Question1 /> 
+        ),
+        (
+            <Question2 />
         )
     ];
 
@@ -123,7 +267,7 @@ export default function UnitRedesign() {
                             <h5>38 min</h5>
                         </div>
                         <div className={unitRedesignStyles['unit-main-section']}>
-                            <h3>Section 6 : Energy Bills</h3>
+                            <h3>Section 6 : Customer Vulnerabilities</h3>
                             <h5>15 min</h5>
                         </div>
                         <div className={unitRedesignStyles['unit-main-section']}>
