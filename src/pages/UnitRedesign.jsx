@@ -242,7 +242,191 @@ function Question5() {
             )}
         </div>
     )    
-}    
+}
+
+function Question6() {
+    const [selectedAnswer, setSelectedAnswer] = useState(null);
+
+    const correctAnswer = 'Estimated Annual Consumption';
+
+    const handleAnswerClick = (answer) => {
+        setSelectedAnswer(answer);
+    }
+
+    return (
+        <div className={unitRedesignStyles['page-15']}>
+            <h1>Question 6</h1>
+            <p>Which of these does the acronym <i>EAC</i> stand for?</p>
+            <button
+                className={`${
+                    selectedAnswer === 'Energy Assessment Certification'
+                        ? (selectedAnswer === correctAnswer ? unitRedesignStyles['button-correct'] : unitRedesignStyles['button-incorrect'])
+                        : ''
+                }`}
+                onClick={() => handleAnswerClick('Energy Assessment Certification')}
+            >
+                Energy Assessment Certification
+            </button>
+            <button
+                className={`${
+                    selectedAnswer === 'Economic Annual Calculation'
+                        ? (selectedAnswer === correctAnswer ? unitRedesignStyles['button-correct'] : unitRedesignStyles['button-incorrect'])
+                        : ''
+                }`}
+                onClick={() => handleAnswerClick('Economic Annual Calculation')}
+            >
+                Economic Annual Calculation
+            </button>
+            <button
+                className={`${
+                    selectedAnswer === 'Estimated Annual Consumption'
+                        ? (selectedAnswer === correctAnswer ? unitRedesignStyles['button-correct'] : unitRedesignStyles['button-incorrect'])
+                        : ''
+                }`}
+                onClick={() => handleAnswerClick('Estimated Annual Consumption')}
+            >
+                Estimated Annual Consumption
+            </button>
+            <button
+                className={`${
+                    selectedAnswer === 'Expected Annual Consumption'
+                        ? (selectedAnswer === correctAnswer ? unitRedesignStyles['button-correct'] : unitRedesignStyles['button-incorrect'])
+                        : ''
+                }`}
+                onClick={() => handleAnswerClick('Expected Annual Consumption')}
+            >
+                Expected Annual Consumption
+            </button>
+        </div>
+    )
+}
+
+function Question7() {
+    const [answerInput, setAnswerInput] = useState('');
+    const [answerCorrect, setAnswerCorrect] = useState('');
+
+    const handleInputChange = (event) => {
+        setAnswerInput(event.target.value);
+    };
+
+    const checkAnswer = () => {
+        if (answerInput === '357.4') {
+            setAnswerCorrect(true);
+        } else if (answerInput === '') {
+            setAnswerCorrect('');
+        } else {
+            setAnswerCorrect(false);
+        };
+    };
+
+    return (
+        <div className={unitRedesignStyles['page-16']}>
+            <h1>Question 7</h1>
+            <p>
+                Below is a table showing a customer's electricity usage from
+                January to April. Calculate this customer's total energy consumption
+                in kWh for February. 
+            </p>
+            <table>
+                    <tr>
+                        <th>Date</th>
+                        <th>Meter Readings</th>
+                    </tr>
+                    <tr>
+                        <td>2023-01-01</td>
+                        <td>3568.4 kWh</td>
+                    </tr>
+                    <tr>
+                        <td>2023-02-01</td>
+                        <td>3801.2 kWh</td>
+                    </tr>
+                    <tr>
+                        <td>2023-03-01</td>
+                        <td>4158.6 kWh</td>
+                    </tr>
+                    <tr>
+                        <td>2023-04-01</td>
+                        <td>4390.1 kWh</td>
+                    </tr>
+                </table>
+            <input 
+                type="text" 
+                placeholder='Answer'
+                value={answerInput}
+                onChange={handleInputChange}
+            />
+            {answerCorrect === true ? (
+                <button className={unitRedesignStyles['button-correct']}>Correct!</button>
+            ) : answerCorrect === false ? (
+                <button className={unitRedesignStyles['button-incorrect']} onClick={checkAnswer}>Incorrect, try again</button>
+            ) : (
+                <button className={unitRedesignStyles['button-neutral']} onClick={checkAnswer}>
+                    Check Answer
+                </button>
+            )}
+        </div>
+    )    
+}
+
+function Question8() {
+    const [selectedAnswer, setSelectedAnswer] = useState(null);
+
+    const correctAnswer = '3100kWh';
+
+    const handleAnswerClick = (answer) => {
+        setSelectedAnswer(answer);
+    }
+
+    return (
+        <div className={unitRedesignStyles['page-15']}>
+            <h1>Question 8</h1>
+            <p>
+                According to OFGEM, what is the annual energy consumption
+                of the average household in the United Kingdom?
+            </p>
+            <button
+                className={`${
+                    selectedAnswer === '4000kWh'
+                        ? (selectedAnswer === correctAnswer ? unitRedesignStyles['button-correct'] : unitRedesignStyles['button-incorrect'])
+                        : ''
+                }`}
+                onClick={() => handleAnswerClick('4000kWh')}
+            >
+                4000kWh
+            </button>
+            <button
+                className={`${
+                    selectedAnswer === '2700kWh'
+                        ? (selectedAnswer === correctAnswer ? unitRedesignStyles['button-correct'] : unitRedesignStyles['button-incorrect'])
+                        : ''
+                }`}
+                onClick={() => handleAnswerClick('2700kWh')}
+            >
+                2700kWh
+            </button>
+            <button
+                className={`${
+                    selectedAnswer === '3100kWh'
+                        ? (selectedAnswer === correctAnswer ? unitRedesignStyles['button-correct'] : unitRedesignStyles['button-incorrect'])
+                        : ''
+                }`}
+                onClick={() => handleAnswerClick('3100kWh')}
+            >
+                3100kWh
+            </button>
+            <button
+                className={`${
+                    selectedAnswer === '3600kWh'
+                        ? (selectedAnswer === correctAnswer ? unitRedesignStyles['button-correct'] : unitRedesignStyles['button-incorrect'])
+                        : ''
+                }`}
+                onClick={() => handleAnswerClick('3600kWh')}
+            >
+                3600kWh
+            </button>
+        </div>
+    )
+}
 
 export default function UnitRedesign() {
     const [pageNumber, setPageNumber] = useState(0);
@@ -262,11 +446,6 @@ export default function UnitRedesign() {
                     <li>Estimated meter reads</li>
                 </ul>
             </div>
-        ),
-        (
-            <video controls>
-                <source src="../../src/assets/videos/video1.mp4" type="video/mp4"/>
-            </video>
         ),
         (   
             <div className={unitRedesignStyles['page-3']}>
@@ -382,22 +561,109 @@ export default function UnitRedesign() {
                     </tr>
                     <tr>
                         <td>2023-09-01</td>
-                        <td>1250 kWh</td>
+                        <td>1250.4 kWh</td>
                     </tr>
                     <tr>
-                        <td>2023-09-02</td>
-                        <td>1260 kWh</td>
+                        <td>2023-10-01</td>
+                        <td>1571.2 kWh</td>
                     </tr>
                     <tr>
-                        <td>2023-09-03</td>
-                        <td>1270 kWh</td>
+                        <td>2023-11-01</td>
+                        <td>1698.7 kWh</td>
                     </tr>
                     <tr>
-                        <td>2023-09-04</td>
-                        <td>1277 kWh</td>
+                        <td>2023-12-01</td>
+                        <td>2044.3 kWh</td>
                     </tr>
                 </table>
+                <p>
+                    To find the customer's monthly consumption, simply subtract the previous month's
+                    reading from this month's. So in this case for the month of November : <br /><br /><b>2044.3 - 1698.7 = 345.6kWh</b>
+                </p>
             </div>            
+        ),
+        (
+            <div className={unitRedesignStyles['page-13']}>
+                <h1>How gas usage is calculated</h1>
+                <p>
+                    Gas usage is calculated from either <b>actual</b> meter readings
+                    or <b>estimated</b> meter readings and requires a conversion from m³ or ft³ into kWh. 
+                    Here is an example of some readings below : 
+                </p>
+                <table>
+                    <tr>
+                        <th>Date</th>
+                        <th>Meter Readings</th>
+                    </tr>
+                    <tr>
+                        <td>2022-01-01</td>
+                        <td>5637.4m³</td>
+                    </tr>
+                    <tr>
+                        <td>2022-02-01</td>
+                        <td>5984.6m³</td>
+                    </tr>
+                    <tr>
+                        <td>2023-03-01</td>
+                        <td>6389.1m³</td>
+                    </tr>
+                </table>
+                <p>
+                    Again, to find the customer's monthly consumption, simply subtract the previous month's
+                    reading from this month's. So in this case for the month of February : <br /><br /><b>6389.1 - 5984.6 = 404.5m³</b>
+                </p>
+                <p>
+                    Then, we need to convert this from cubic meters into kilowatt hours : <br /><br />
+                    <b>
+                        Units Consumed (404.5m³) <br /> 
+                        x Volume Conversion Factor (1.0) <br />
+                        x Volume Correction (1.02264) <br />
+                        x Calorific Value (39.5m³) <br />
+                        ÷ Joules Conversion (3.6) <br />
+                        = Total Usage In kWh (4538.75) <br />
+                    </b>
+                </p>
+            </div>            
+        ),
+        (
+            <div className={unitRedesignStyles['page-14']}>
+                <h1>Estimated Meter Reads</h1>
+                <p>
+                    <b>How is an estimated meter reading calculated?</b>
+                    <br />
+                    The estimated meter reading is derived from a customer's
+                    estimated annual consumption <b>(EAC)</b> and gas estimated
+                    annual quantity <b>(AQ)</b>.
+                </p>
+                <p>
+                    <b>The estimated annual consumption</b> is calculated by taking all
+                    meter readings that will have been provided by the property over a
+                    period of one year or more and the average usage per month is calculated
+                    using this figure. The estimate for each meter is managed within a centralised
+                    industry database.  
+                </p>
+                <p>
+                    <i><b>Remember that the estimated readings can vary slightly from actual usage.</b></i>
+                </p>
+                <p>
+                    Estimated annual consumption (EAC) helps an energy provider to predict how much a customer
+                    should be paying each month by direct debit, accounting for advance payment and building
+                    credit during the summer to compensate for higher bills during winter.
+                </p>
+                <p>
+                    Accoring to The Office of Gas and Electricity Markets, the 'Average' home in the UK
+                    uses <b>3100kWh of electricity</b> and <b>12,000kWh of gas</b> per year. 
+                </p>
+            </div>
+        ),
+        (
+            <Question6 />
+        ),
+        (
+            <Question7 />
+        ),
+        (
+            <Question8 />
         )
     ];
 
@@ -465,11 +731,11 @@ export default function UnitRedesign() {
                             <h3>Section 2 : The Energy Industry</h3>
                             <h5>24 min</h5>
                         </div>
-                        <div className={unitRedesignStyles['unit-main-section']}>
+                        <div className={unitRedesignStyles['unit-main-section-selected']}>
                             <h3>Section 3 : Energy Bills</h3>
                             <h5>17 min</h5>
                         </div>
-                        <div className={unitRedesignStyles['unit-main-section-selected']}>
+                        <div className={unitRedesignStyles['unit-main-section']}>
                             <h3>Section 4 : Energy Price Gaurantee</h3>
                             <h5>11 min</h5>
                         </div>

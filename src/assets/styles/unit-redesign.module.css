@@ -527,6 +527,10 @@
     margin-bottom: 20px;
 }
 
+.page-12 table {
+    margin-bottom: 20px;
+}
+
 .page-12 th {
     color: #FFFFFF;
     background-color: #2D2F31;
@@ -536,7 +540,175 @@
     text-align: center;
 }
 
-.page-12 tr:nth-child(odd) {
+.page-12 tr {
     color: #FFFFFF;
     background-color: #3E4143;
+}
+
+.page-13 {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+}
+
+.page-13 h1 {
+    margin-bottom: 20px;
+}
+
+.page-13 p {
+    margin-bottom: 20px;
+}
+
+.page-13 table {
+    margin-bottom: 20px;
+}
+
+.page-13 th {
+    color: #FFFFFF;
+    background-color: #2D2F31;
+}
+
+.page-13 td {
+    text-align: center;
+}
+
+.page-13 tr {
+    color: #FFFFFF;
+    background-color: #3E4143;
+}
+
+.page-14 {
+    max-width: 400px;
+}
+
+.page-14 h1 {
+    margin-bottom: 20px;
+}
+
+.page-14 p {
+    margin-bottom: 20px;
+}
+
+.page-15 {
+    display: flex;
+    flex-direction: column;
+}
+
+.page-15 h1 {
+    margin-bottom: 20px;
+}
+
+.page-15 p {
+    max-width: 400px;
+    margin-bottom: 20px;
+}
+
+.page-15 button {
+    padding: 20px;
+    width: 400px;
+    color: #FFFFFF;
+    background-color: #2D2F31;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.page-15 .button-correct {
+    padding: 20px;
+    width: 400px;
+    color: #FFFFFF;
+    background-color: #28C382;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.page-15 .button-incorrect {
+    padding: 20px;
+    width: 400px;
+    color: #FFFFFF;
+    background-color: #B51C15;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.page-16 {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+}
+
+.page-16 h1 {
+    margin-bottom: 20px;
+}
+
+.page-16 p {
+    margin-bottom: 20px;
+}
+
+.page-16 table {
+    margin-bottom: 20px;
+}
+
+.page-16 th {
+    color: #FFFFFF;
+    background-color: #2D2F31;
+}
+
+.page-16 td {
+    text-align: center;
+}
+
+.page-16 tr {
+    color: #FFFFFF;
+    background-color: #3E4143;
+}
+
+.page-16 input {
+    padding: 10px;
+    max-width: 200px;
+    margin-bottom: 20px;
+}
+
+.page-16 button {
+    padding: 10px;
+    max-width: 200px;
+    color: #FFFFFF;
+    background-color: #2D2F31;
+    border: none;
+    outline: none;
+}
+
+.page-16 .button-neutral {
+    padding: 10px;
+    width: 200px;
+    color: #FFFFFF;
+    background-color: #2D2F31;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.page-16 .button-correct {
+    padding: 10px;
+    width: 200px;
+    color: #FFFFFF;
+    background-color: #28C382;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.page-16 .button-incorrect {
+    padding: 10px;
+    width: 200px;
+    color: #FFFFFF;
+    background-color: #B51C15;
+    border: none;
+    outline: none;
+    cursor: pointer;
 }
