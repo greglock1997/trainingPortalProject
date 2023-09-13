@@ -54,7 +54,7 @@ export default function Login({ setIsLoggedIn }) {
       const status = response.data.status;
       if (status === 200) {
         setIsLoggedIn(true);
-        navigate('/dashboard');
+        navigate('/unit-redesign');
       } else {
         setErrorMessage("Incorrect username or password");
       }

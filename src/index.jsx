@@ -11,7 +11,7 @@ import AdminRequired from './components/AdminRequired.jsx'
 import ResetPassword from './pages/ResetPassword.jsx'
 import Admin from './pages/Admin.jsx'
 import Profile from './pages/Profile.jsx'
-import UnitRedesign from './pages/UnitRedesign.jsx'
+import UnitRedesign from './pages/UnitRedesign2.jsx'
 import axios from 'axios';
 import './index.css'
 import MenuRedesign from './pages/MenuRedesign.jsx'
@@ -72,25 +72,27 @@ export default function App() {
 
     return (
         <BrowserRouter>
-            <div className="container">   
-                    {isLoggedIn && (
-                        <header>
-                            <div className="header-nav">  
-                                <Link to="/dashboard">Dashboard</Link>
-                                {isAdmin && <Link to="/admin">Admin</Link>}
-                                <Link to="/login" onClick={logout}>Logout</Link>
-                            </div>
-                            <Link to="#">{username}</Link>
-                        </header>
-                    )}
+            <div className="container">
+                    {/*   
+                        {isLoggedIn && (
+                            <header>
+                                <div className="header-nav">  
+                                    <Link to="/dashboard">Dashboard</Link>
+                                    {isAdmin && <Link to="/admin">Admin</Link>}
+                                    <Link to="/login" onClick={logout}>Logout</Link>
+                                </div>
+                                <Link to="#">{username}</Link>
+                            </header>
+                        )}
+                    */}
                 <Routes>
                     <Route path="/menu-redesign" element={<MenuRedesign />}></Route>
-                    <Route path="/unit-redesign" element={<UnitRedesign />}></Route>
                     <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
                     <Route path="/register" element={<Register />} />
                     <Route path="/reset-password" element={<ResetPassword />} />
                     <Route path="/logout" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
                     <Route element={<AuthRequired isLoggedIn={isLoggedIn} />}>
+                        <Route path="/unit-redesign" element={<UnitRedesign />}></Route>
                         <Route path="/dashboard" element={<Dashboard />} />
                         <Route path="/unit/:unitNumber" element={<Unit />} />
                         <Route element={<AdminRequired isLoggedIn={isLoggedIn} />}>

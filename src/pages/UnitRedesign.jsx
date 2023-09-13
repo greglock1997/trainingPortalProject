@@ -1,669 +1,380 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { Page, MultipleChoiceQuestion, InputQuestion } from '../components/pageComponents';
 import unitRedesignStyles from '../assets/styles/unit-redesign.module.css';
 
-function Question1() {
-    const [answerInput, setAnswerInput] = useState('');
-    const [answerCorrect, setAnswerCorrect] = useState('');
+function ProgressBar({pageNumber, pages}) {
+    const completionPercentage = (pageNumber / (pages.length - 1)) * 100;
 
-    const handleInputChange = (event) => {
-        setAnswerInput(event.target.value);
-    };
-
-    const checkAnswer = () => {
-        if (answerInput === '165.51') {
-            setAnswerCorrect(true);
-        } else if (answerInput === '') {
-            setAnswerCorrect('');
-        } else {
-            setAnswerCorrect(false);
-        };
-    };
-
-    return (
-        <div className={unitRedesignStyles['page-6']}>
-            <h1>Question 1</h1>
-            <p>
-                Imagine a customer has been with us for 91 days and our current standing charge is
-                27p/day. The customer has also used 783kwH of energy during this time, our unit rate
-                is 18p/kWh. Calculate the customer's total cost (in £) during this time and enter it into the
-                box below.
-            </p>
-            <input 
-                type="text" 
-                placeholder='Answer'
-                value={answerInput}
-                onChange={handleInputChange}
-            />
-            {answerCorrect === true ? (
-                <button className={unitRedesignStyles['button-correct']}>Correct!</button>
-            ) : answerCorrect === false ? (
-                <button className={unitRedesignStyles['button-incorrect']} onClick={checkAnswer}>Incorrect, try again</button>
-            ) : (
-                <button className={unitRedesignStyles['button-neutral']} onClick={checkAnswer}>
-                    Check Answer
-                </button>
-            )}
-        </div>
-    )
-}
-
-function Question2() {
-    const [selectedAnswer, setSelectedAnswer] = useState(null);
-
-    const correctAnswer = 'kWh';
-
-    const handleAnswerClick = (answer) => {
-        setSelectedAnswer(answer);
+    const progressBarStyle = {
+        width: `${completionPercentage}%`
     }
 
     return (
-        <div className={unitRedesignStyles['page-7']}>
-            <h1>Question 2</h1>
-            <p>Which of these is a common unit for energy usage?</p>
-            <button
-                className={`${
-                    selectedAnswer === 'mWh'
-                        ? (selectedAnswer === correctAnswer ? unitRedesignStyles['button-correct'] : unitRedesignStyles['button-incorrect'])
-                        : ''
-                }`}
-                onClick={() => handleAnswerClick('mWh')}
+        <div className={unitRedesignStyles['unit-progress-bar-container']}>
+            <div 
+                className={unitRedesignStyles['unit-progress-bar']}
+                style={progressBarStyle}    
             >
-                mWh
-            </button>
-            <button
-                className={`${
-                    selectedAnswer === 'kWh'
-                        ? (selectedAnswer === correctAnswer ? unitRedesignStyles['button-correct'] : unitRedesignStyles['button-incorrect'])
-                        : ''
-                }`}
-                onClick={() => handleAnswerClick('kWh')}
-            >
-                kWh
-            </button>
-            <button
-                className={`${
-                    selectedAnswer === 'gWh'
-                        ? (selectedAnswer === correctAnswer ? unitRedesignStyles['button-correct'] : unitRedesignStyles['button-incorrect'])
-                        : ''
-                }`}
-                onClick={() => handleAnswerClick('gWh')}
-            >
-                gWh
-            </button>
-            <button
-                className={`${
-                    selectedAnswer === 'Wh'
-                        ? (selectedAnswer === correctAnswer ? unitRedesignStyles['button-correct'] : unitRedesignStyles['button-incorrect'])
-                        : ''
-                }`}
-                onClick={() => handleAnswerClick('Wh')}
-            >
-                Wh
-            </button>
+            </div>
         </div>
     )
 }
 
-function Question3() {
-    const [answerInput, setAnswerInput] = useState('');
-    const [answerCorrect, setAnswerCorrect] = useState('');
-
-    const handleInputChange = (event) => {
-        setAnswerInput(event.target.value);
-    };
-
-    const checkAnswer = () => {
-        if (answerInput === '823') {
-            setAnswerCorrect(true);
-        } else if (answerInput === '') {
-            setAnswerCorrect('');
-        } else {
-            setAnswerCorrect(false);
-        };
-    };
-
-    return (
-        <div className={unitRedesignStyles['page-9']}>
-            <h1>Question 3</h1>
-            <p>
-                In this scenario the customer has been receiving their energy from this supplier
-                for one year. The customer has consumed 5000kWh of electricity during this time.
-                The standing charge of the supplier is 20p/day and the unit rate is 15p/kWh. The 5%
-                VAT rate is already included in these rates. Calulate the customer's total cost for
-                the year in £ and enter it into the box below.
-            </p>
-            <input 
-                type="text" 
-                placeholder='Answer'
-                value={answerInput}
-                onChange={handleInputChange}
-            />
-            {answerCorrect === true ? (
-                <button className={unitRedesignStyles['button-correct']}>Correct!</button>
-            ) : answerCorrect === false ? (
-                <button className={unitRedesignStyles['button-incorrect']} onClick={checkAnswer}>Incorrect, try again</button>
-            ) : (
-                <button className={unitRedesignStyles['button-neutral']} onClick={checkAnswer}>
-                    Check Answer
-                </button>
-            )}
-        </div>
-    )    
-}
-
-function Question4() {
-    const [answerInput, setAnswerInput] = useState('');
-    const [answerCorrect, setAnswerCorrect] = useState('');
-
-    const handleInputChange = (event) => {
-        setAnswerInput(event.target.value);
-    };
-
-    const checkAnswer = () => {
-        if (answerInput === '1584.33') {
-            setAnswerCorrect(true);
-        } else if (answerInput === '') {
-            setAnswerCorrect('');
-        } else {
-            setAnswerCorrect(false);
-        };
-    };
-
-    return (
-        <div className={unitRedesignStyles['page-10']}>
-            <h1>Question 4</h1>
-            <p>
-                This customer has also been receiving energy from their supplier for one year. They have
-                consumed 6500kWh of electricity and 13050kWh of gas. This supplier's standing charge is 22.1p/day
-                for electricty and 23.4p/day for gas. The unit rate for electricity is 16.8p/kWh and 2.5p/kWh for
-                gas. All rates include the 5% VAT rate. Calculate how much this customer spent in one year.
-            </p>
-            <input 
-                type="text" 
-                placeholder='Answer'
-                value={answerInput}
-                onChange={handleInputChange}
-            />
-            {answerCorrect === true ? (
-                <button className={unitRedesignStyles['button-correct']}>Correct!</button>
-            ) : answerCorrect === false ? (
-                <button className={unitRedesignStyles['button-incorrect']} onClick={checkAnswer}>Incorrect, try again</button>
-            ) : (
-                <button className={unitRedesignStyles['button-neutral']} onClick={checkAnswer}>
-                    Check Answer
-                </button>
-            )}
-        </div>
-    )    
-}
-
-function Question5() {
-    const [answerInput, setAnswerInput] = useState('');
-    const [answerCorrect, setAnswerCorrect] = useState('');
-
-    const handleInputChange = (event) => {
-        setAnswerInput(event.target.value);
-    };
-
-    const checkAnswer = () => {
-        if (answerInput === '1272.75') {
-            setAnswerCorrect(true);
-        } else if (answerInput === '') {
-            setAnswerCorrect('');
-        } else {
-            setAnswerCorrect(false);
-        };
-    };
-
-    return (
-        <div className={unitRedesignStyles['page-11']}>
-            <h1>Question 5</h1>
-            <p>
-                This time, a customer has been receiving energy from their supplier for 239 days.
-                They've consumed 5793kWh of electricity and 9847kWh of gas. The supplier's electricty
-                standing charge is 17.17706p/day with a unit rate of 14.51791p/kWh. For gas the standing
-                charge is 19.48624p/day and the unit rate is 2.879p/kWh. The rates above do not include
-                the 5% VAT. How much does this customer spend in 239 days?
-            </p>
-            <input 
-                type="text" 
-                placeholder='Answer'
-                value={answerInput}
-                onChange={handleInputChange}
-            />
-            {answerCorrect === true ? (
-                <button className={unitRedesignStyles['button-correct']}>Correct!</button>
-            ) : answerCorrect === false ? (
-                <button className={unitRedesignStyles['button-incorrect']} onClick={checkAnswer}>Incorrect, try again</button>
-            ) : (
-                <button className={unitRedesignStyles['button-neutral']} onClick={checkAnswer}>
-                    Check Answer
-                </button>
-            )}
-        </div>
-    )    
-}
-
-function Question6() {
-    const [selectedAnswer, setSelectedAnswer] = useState(null);
-
-    const correctAnswer = 'Estimated Annual Consumption';
-
-    const handleAnswerClick = (answer) => {
-        setSelectedAnswer(answer);
-    }
-
-    return (
-        <div className={unitRedesignStyles['page-15']}>
-            <h1>Question 6</h1>
-            <p>Which of these does the acronym <i>EAC</i> stand for?</p>
-            <button
-                className={`${
-                    selectedAnswer === 'Energy Assessment Certification'
-                        ? (selectedAnswer === correctAnswer ? unitRedesignStyles['button-correct'] : unitRedesignStyles['button-incorrect'])
-                        : ''
-                }`}
-                onClick={() => handleAnswerClick('Energy Assessment Certification')}
-            >
-                Energy Assessment Certification
-            </button>
-            <button
-                className={`${
-                    selectedAnswer === 'Economic Annual Calculation'
-                        ? (selectedAnswer === correctAnswer ? unitRedesignStyles['button-correct'] : unitRedesignStyles['button-incorrect'])
-                        : ''
-                }`}
-                onClick={() => handleAnswerClick('Economic Annual Calculation')}
-            >
-                Economic Annual Calculation
-            </button>
-            <button
-                className={`${
-                    selectedAnswer === 'Estimated Annual Consumption'
-                        ? (selectedAnswer === correctAnswer ? unitRedesignStyles['button-correct'] : unitRedesignStyles['button-incorrect'])
-                        : ''
-                }`}
-                onClick={() => handleAnswerClick('Estimated Annual Consumption')}
-            >
-                Estimated Annual Consumption
-            </button>
-            <button
-                className={`${
-                    selectedAnswer === 'Expected Annual Consumption'
-                        ? (selectedAnswer === correctAnswer ? unitRedesignStyles['button-correct'] : unitRedesignStyles['button-incorrect'])
-                        : ''
-                }`}
-                onClick={() => handleAnswerClick('Expected Annual Consumption')}
-            >
-                Expected Annual Consumption
-            </button>
-        </div>
-    )
-}
-
-function Question7() {
-    const [answerInput, setAnswerInput] = useState('');
-    const [answerCorrect, setAnswerCorrect] = useState('');
-
-    const handleInputChange = (event) => {
-        setAnswerInput(event.target.value);
-    };
-
-    const checkAnswer = () => {
-        if (answerInput === '357.4') {
-            setAnswerCorrect(true);
-        } else if (answerInput === '') {
-            setAnswerCorrect('');
-        } else {
-            setAnswerCorrect(false);
-        };
-    };
-
-    return (
-        <div className={unitRedesignStyles['page-16']}>
-            <h1>Question 7</h1>
-            <p>
-                Below is a table showing a customer's electricity usage from
-                January to April. Calculate this customer's total energy consumption
-                in kWh for February. 
-            </p>
-            <table>
-                    <tr>
-                        <th>Date</th>
-                        <th>Meter Readings</th>
-                    </tr>
-                    <tr>
-                        <td>2023-01-01</td>
-                        <td>3568.4 kWh</td>
-                    </tr>
-                    <tr>
-                        <td>2023-02-01</td>
-                        <td>3801.2 kWh</td>
-                    </tr>
-                    <tr>
-                        <td>2023-03-01</td>
-                        <td>4158.6 kWh</td>
-                    </tr>
-                    <tr>
-                        <td>2023-04-01</td>
-                        <td>4390.1 kWh</td>
-                    </tr>
-                </table>
-            <input 
-                type="text" 
-                placeholder='Answer'
-                value={answerInput}
-                onChange={handleInputChange}
-            />
-            {answerCorrect === true ? (
-                <button className={unitRedesignStyles['button-correct']}>Correct!</button>
-            ) : answerCorrect === false ? (
-                <button className={unitRedesignStyles['button-incorrect']} onClick={checkAnswer}>Incorrect, try again</button>
-            ) : (
-                <button className={unitRedesignStyles['button-neutral']} onClick={checkAnswer}>
-                    Check Answer
-                </button>
-            )}
-        </div>
-    )    
-}
-
-function Question8() {
-    const [selectedAnswer, setSelectedAnswer] = useState(null);
-
-    const correctAnswer = '3100kWh';
-
-    const handleAnswerClick = (answer) => {
-        setSelectedAnswer(answer);
-    }
-
-    return (
-        <div className={unitRedesignStyles['page-15']}>
-            <h1>Question 8</h1>
-            <p>
-                According to OFGEM, what is the annual energy consumption
-                of the average household in the United Kingdom?
-            </p>
-            <button
-                className={`${
-                    selectedAnswer === '4000kWh'
-                        ? (selectedAnswer === correctAnswer ? unitRedesignStyles['button-correct'] : unitRedesignStyles['button-incorrect'])
-                        : ''
-                }`}
-                onClick={() => handleAnswerClick('4000kWh')}
-            >
-                4000kWh
-            </button>
-            <button
-                className={`${
-                    selectedAnswer === '2700kWh'
-                        ? (selectedAnswer === correctAnswer ? unitRedesignStyles['button-correct'] : unitRedesignStyles['button-incorrect'])
-                        : ''
-                }`}
-                onClick={() => handleAnswerClick('2700kWh')}
-            >
-                2700kWh
-            </button>
-            <button
-                className={`${
-                    selectedAnswer === '3100kWh'
-                        ? (selectedAnswer === correctAnswer ? unitRedesignStyles['button-correct'] : unitRedesignStyles['button-incorrect'])
-                        : ''
-                }`}
-                onClick={() => handleAnswerClick('3100kWh')}
-            >
-                3100kWh
-            </button>
-            <button
-                className={`${
-                    selectedAnswer === '3600kWh'
-                        ? (selectedAnswer === correctAnswer ? unitRedesignStyles['button-correct'] : unitRedesignStyles['button-incorrect'])
-                        : ''
-                }`}
-                onClick={() => handleAnswerClick('3600kWh')}
-            >
-                3600kWh
-            </button>
-        </div>
-    )
-}
+// Page Component
 
 export default function UnitRedesign() {
     const [pageNumber, setPageNumber] = useState(0);
     const [dashboardPageNumber, setDashboardPageNumber] = useState(0);
+    const [completedPages, setCompletedPages] = useState([]);
+
+    const [selectedAnswers, setSelectedAnswers] = useState([]);
+    const [correctAnswers, setCorrectAnswers] = useState([]);
+    const [numberOfCorrectAnswers, setNumberOfCorrectAnswers] = useState(0);
+
+    const [dashboardStatus, setDashboardStatus] = useState('open');
+    const [sidebarStatus, setSidebarStatus] = useState('open');
+
+    const handleAnswerSelection = (pageId, answer) => {
+        setSelectedAnswers((prevAnswers) => ({
+            ...prevAnswers,
+            [pageId]: answer,
+        }));
+    };
+
+    const handleCorrectAnswerSelection = (pageId, correct) => {
+        setCorrectAnswers((prevCorrectAnswers) => ({
+            ...prevCorrectAnswers,
+            [pageId]: correct
+        }));
+
+        if (correct) {
+            setNumberOfCorrectAnswers(numberOfCorrectAnswers + 1);
+        }
+    }
+
+
+    const handlePageCompletion = (pageId) => {
+        if (!completedPages.includes(pageId)) {
+            setCompletedPages([...completedPages, pageId]);
+        }
+        console.log(completedPages);
+    }
+
+    const resetPage = () => {
+        setPageNumber(0);
+        setCompletedPages([]);
+        setSelectedAnswers([]);
+        setCorrectAnswers([]);
+        setNumberOfCorrectAnswers(0);
+    }
 
     const pages = [
         (
-            <div className={unitRedesignStyles['page-1']}>
-                <h1>Focus Points</h1>
-                <ul>
-                    <li>Introduction to energy bills</li>
-                    <li>Calculate my bill</li>
-                    <li>Unit rate and standing charge </li>
-                    <li>Measure of gas and electricity units</li>
-                    <li>Scenarios</li>
-                    <li>How is usage calculated</li>
-                    <li>Estimated meter reads</li>
-                </ul>
-            </div>
-        ),
-        (   
-            <div className={unitRedesignStyles['page-3']}>
-                <div>
-                    <h1>Calculating an energy bill</h1>
-                    <p>Customers may not always understand their bill, remember that as experts it is our responsibility to explain it to them.</p>
-                    <ul>
-                        <li>Bills reflect P x Q</li>
-                        <li>P = Price of energy, set by the energy provider</li>
-                        <li>Q = Quantity of energy used, set by the customer</li>
-                        <li>VAT for energy is charged at 5%, not 20%</li>
-                    </ul>
-                    <b><h3>Let's explore this customer's bill...</h3></b>
-                </div>
-                <img src="src\assets\images\Picture1.png" alt="" />
-            </div>
+            <Page
+                title="Key Points"
+                list={
+                    [
+                        "Introduction to energy bills",
+                        "Calculating bills",
+                        "Unit rates and standing charges",
+                        "Measure of gas and electricity units",
+                        "Scenarios",
+                        "How is usage calculated",
+                        "Estimated meter reads"
+                    ]
+                }
+                pageId={1}
+                unitRedesignStyles={unitRedesignStyles}
+            />
         ),
         (
-            <div className={unitRedesignStyles['page-4']}>
-                <h1>Unit rate</h1>
-                <p>The <b>unit rate</b> is the price-per-unit of the gas and electricity you consume in your household. For exmaple, electricity is measured in
-                kilowatt hours (kWh), so a unit rate would be the cost per kWh used. Unit rates can vary depending on several reasons : </p>
-                <ul>
-                    <li>Your location</li>
-                    <li>Your preferred payment method</li>
-                    <li>Your energy tariff</li>
-                </ul>
-                <p>For example, a customer has used 300kWh of electricity and our unit rate is 16.5p/kWh. Using the Price x Quantity forumula
-                    we can calculate their bill. <br /><br /> <b>16.5p x 300kWh = 4950p = £49.50</b>
-                </p>
-            </div>
+            <Page 
+                title="Calculating an energy bill"
+                paragraph="Customers may not always understand their bill, so it is our responsibility as experts to explain it to them"
+                list={
+                    [
+                        "Bills reflect P x Q",
+                        "P = Price of energy, set by the energy provider",
+                        "Q = Quantity of energy used, set by the customer",
+                        "VAT for energy is charged at 5%"
+                    ]
+                }
+                img="src\assets\images\Picture1.png"
+                pageId={2}
+                unitRedesignStyles={unitRedesignStyles}
+            />
         ),
         (
-            <div className={unitRedesignStyles['page-5']}>
-                <h1>Standing charge</h1>
-                <p>A <b>standing charge</b> is a fixed daily amount that you must pay no matter how much energy you use.
-                It even applies to properties that are empty for part of the year, like a holiday home. The charge coverd the cost
+            <Page   
+                title="Unit Rate"
+                paragraph="The unit rate is the price-per-unit of the gas and electricity you consume in your household. For exmaple, electricity is measured in
+                kilowatt hours (kWh), so a unit rate would be the cost per kWh used. Unit rates can vary depending on several reasons : "
+                list={
+                    [
+                        "Your location",
+                        "Your preferred payment method",
+                        "Your energy tariff"
+                    ]
+                }
+                pageId={3}
+                unitRedesignStyles={unitRedesignStyles}
+            />
+        ),
+        (
+            <Page 
+                title="Standing Charge"
+                paragraph="A is a fixed daily amount that you must pay no matter how much energy you use.
+                It even applies to properties that are empty for part of the year, like a holiday home. The charge covers the cost
                 of supplying the property with gas and electricity. It can thought of as a line rental for a mobile phone, but with energy instead.
-                These costs include : 
-                </p>
-                <ul>
-                    <li>Using and maintaining the networks, wires and pipes that carry gas and electricity
-                        to customers' homes
-                    </li>
-                    <li>Keeping homes connected to the energy network</li>
-                    <li>Carrying out meter readings</li>
-                    <li>Payment towards government initiatives that help vulnerable households and reduce CO2 emissions</li>
-                </ul>
-                <p>
-                    For example, a customer has been with a supplier for 30 days and the supplier's standing charge
-                    is 21p/day. Using the Price x Quantity formula, <br /> <br /> <b>21p x 30days = 630p = £63</b>
-                </p>
-                <p>Now let's try a quick test</p>
+                These costs include : "
+                list={
+                    [
+                        "Using and maintaining the networks, wires and pipes that carry gas and electricity to customers' homes",
+                        "Keeping homes connected to the energy network",
+                        "Carrying out meter readings",
+                        "Payment towards government initiatives that help vulnerable households and reduce CO2 emissions"
+                    ]
+                }
+                pageId={4}
+                unitRedesignStyles={unitRedesignStyles}
+            />
+        ),
+        (
+            <MultipleChoiceQuestion
+                title="Question 1"
+                question="Which of these is a common unit for energy usage?" 
+                correctAnswer={"kWh"}
+                pageId={5}
+                selectedAnswers={selectedAnswers}
+                answers={["mWh", "Wh", "kWh", "gWh"]}
+                handleAnswerSelection={handleAnswerSelection}
+                handleCorrectAnswerSelection={handleCorrectAnswerSelection}
+                unitRedesignStyles={unitRedesignStyles}
+
+            />
+        ),
+        (
+            <InputQuestion
+                title="Question 2"
+                question="Calculate the customer's total cost to the nearest £"
+                correctAnswer={"166"}
+                selectedAnswers={selectedAnswers}
+                scenario={
+                    [
+                        "A customer has been receiving energy for 91 days",
+                        "They have consumed 783kWh of electricty",
+                        "The standing charge is 27p/day",
+                        "The unit rate for electricity is 18p/kWh",
+                        "The 5% VAT tax rate is not included"
+                    ]
+                } 
+                pageId={6}
+                img="https://images.unsplash.com/photo-1413882353314-73389f63b6fd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+                handleAnswerSelection={handleAnswerSelection}
+                handleCorrectAnswerSelection={handleCorrectAnswerSelection}
+                unitRedesignStyles={unitRedesignStyles}
+            />
+        ),
+        (
+            <Page 
+                title="Measure of gas and electricity units"
+                paragraph="Electricity and gas meters measure the amount of energy used in homes. Suppliers then bills the customers in kilowatt
+                hours for both electricty and gas. To convert gas units into kilowatt hours we follow the formula below : "
+                list={
+                    [
+                        "Units consumed (cubic meters)",
+                        "x Volume Conversion Factor (1.0 for cubic meters)",
+                        "x Vome Correction (1.02264 to account for temperature and pressure)",
+                        "x Calorific Value (39.5 Joules per m³)",
+                        "÷ 3600 (3600 seconds in each hour)",
+                        "÷ 1000 (Number of Joules in a kilowatt hour)",
+                        "= Number of kilowatt hours"
+                    ]
+                }
+                pageId={7}
+                unitRedesignStyles={unitRedesignStyles}
+            />
+        ),
+        (
+            <InputQuestion
+                title="Question 3"
+                question="Calculate the customer's total cost to the nearest £"
+                correctAnswer="823"
+                selectedAnswers={selectedAnswers}
+                scenario={
+                    [
+                        "A customer has been receiving energy for 1 year",
+                        "They have consumed 5000kWh of electricty",
+                        "The standing charge is 20p/day",
+                        "The unit rate for electricity is 15p/kWh",
+                        "All rates include the 5% VAT tax rate"
+                    ]
+                }
+                pageId={8}
+                img="https://images.pexels.com/photos/1495580/pexels-photo-1495580.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                handleAnswerSelection={handleAnswerSelection}
+                handleCorrectAnswerSelection={handleCorrectAnswerSelection}
+                unitRedesignStyles={unitRedesignStyles}
+            />
+        ),
+        (
+            <InputQuestion
+                title="Question 4"
+                question="Calculate the customer's total cost to the nearest £"
+                correctAnswer="1584"
+                selectedAnswers={selectedAnswers}
+                scenario={
+                    [
+                        "This customer has been receiving energy for 12 months",
+                        "They have used 6500kWh of electricity",
+                        "The standing charge is 22.1p/day",
+                        "The unit rate is 16.8p/kWh",
+                        "All rates include the 5% VAT tax rate"
+                    ]
+                }
+                pageId={9}
+                img="https://images.pexels.com/photos/1292464/pexels-photo-1292464.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                handleAnswerSelection={handleAnswerSelection}
+                handleCorrectAnswerSelection={handleCorrectAnswerSelection}
+                unitRedesignStyles={unitRedesignStyles}
+            />
+        ),
+        (
+            <InputQuestion 
+                title="Question 5"
+                question="Calculate the customer's total cost to the nearest £"
+                correctAnswer="1273"
+                selectedAnswers={selectedAnswers}
+                scenario={
+                    [
+                        "A customer has been receiving energy for 239 days",
+                        "They've used a total of 9847kWh in gas",
+                        "The standing charge for gas is 19.49p/day",
+                        "The unit rate is 2.88p/kWh",
+                        "These rates do not include the 5% VAT"
+                    ]
+                }
+                pageId={10}
+                img="https://images.pexels.com/photos/218445/pexels-photo-218445.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                handleAnswerSelection={handleAnswerSelection}
+                handleCorrectAnswerSelection={handleCorrectAnswerSelection}
+                unitRedesignStyles={unitRedesignStyles}
+            />
+        ),
+        (
+            <Page 
+                title="How electricity usage is calulcated"
+                paragraph="Electricity usage is calculated from actual meter readings or estimated meter readings"
+                table={
+                    {
+                        headers: ['Date', 'Meter Readings'],
+                        rows: [
+                            ['2023-09-01', '1250.4kWh'],
+                            ['2023-10-01', '1571.2kWh'],
+                            ['2023-11-01', '1698.7kWh'],
+                            ['2023-12-01', '2044.3kWh']
+                        ]
+                    }
+                }
+                unitRedesignStyles={unitRedesignStyles}
+            />         
+        ),
+        (
+            <Page 
+                title="How gas usage is calculated"
+                paragraph="Gas usage is calculated from either <b>actual</b> meter readings
+                or estimated meter readings and requires a conversion from m³ or ft³ into kWh. 
+                Here is an example of some readings below : "
+                table={
+                    {
+                        headers: ['Date', 'Meter Readings'],
+                        rows: [
+                            ['2022-01-01', '5637.4m³'],
+                            ['2022-02-01', '5984.6m³'],
+                            ['2022-03-01', '6389.1m³']
+                        ]
+                    }
+                }
+                unitRedesignStyles={unitRedesignStyles}
+            />          
+        ),
+        (
+            <Page 
+                title="Estimated Meter Readings"
+                paragraph="The estimated meter reading is derived from a customer's Estimated
+                Annual Consumption (EAC) and Annual Quantity (AQ). The estimated annual consumption
+                is calculated by taking all meter readings that will have been provided by the
+                property over a period of a year or more and then the average usage per month is
+                calculated using this figure"
+                unitRedesignStyles={unitRedesignStyles}
+            />
+        ),
+        (
+            <MultipleChoiceQuestion
+                title="Question 6"
+                question="Which of these does the acronym EAC stand for?" 
+                correctAnswer={"Estimated Annual Consumption"}
+                pageId={11}
+                selectedAnswers={selectedAnswers}
+                answers={["Energy Assessment Certification", "Economic Annual Calculation", "Estimated Annual Consumption", "Expected Annual Consumption"]}
+                handleAnswerSelection={handleAnswerSelection}
+                handleCorrectAnswerSelection={handleCorrectAnswerSelection}
+                unitRedesignStyles={unitRedesignStyles}
+
+            />
+        ),
+        (
+            <InputQuestion 
+                title="Question 7"
+                question="Calculate the customer's cost for January"
+                correctAnswer=""
+                selectedAnswers={selectedAnswers}
+                table={
+                    {
+                        headers: ['Date', 'Meter Readings'],
+                        rows: [
+                            ['2023-01-01', '3568.4kWh'],
+                            ['2023-02-01', '3801.2kWh'],
+                            ['2023-03-01', '4158.6kWh'],
+                            ['2023-04-01', '4390.1kWh']
+                        ]
+                    }
+                }
+                pageId={12}
+                img="https://images.pexels.com/photos/218445/pexels-photo-218445.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                handleAnswerSelection={handleAnswerSelection}
+                handleCorrectAnswerSelection={handleCorrectAnswerSelection}
+                unitRedesignStyles={unitRedesignStyles}
+            />
+        ),
+        (
+            <MultipleChoiceQuestion
+                title="Question 8"
+                question="What is the annual energy consumption of the average house in the United Kingdom?" 
+                correctAnswer={"3100kWh"}
+                pageId={13}
+                selectedAnswers={selectedAnswers}
+                answers={["4000kWh", "2700kWh", "3000kWh", "3100kWh"]}
+                handleAnswerSelection={handleAnswerSelection}
+                handleCorrectAnswerSelection={handleCorrectAnswerSelection}
+                unitRedesignStyles={unitRedesignStyles}
+
+            />
+        ),
+        (
+            <div className={unitRedesignStyles['final-page']}>
+                <h1>You've completed this unit! 🎉</h1>
+                <h2>You scored {numberOfCorrectAnswers}/8</h2>
+                <button><b>Click here to go onto the next unit</b></button>
+                <button
+                    className={unitRedesignStyles['reset-button']}
+                    onClick={resetPage}
+                >
+                    <b>Try again?</b>
+                </button>
             </div>
-        ),
-        (
-            <Question1 /> 
-        ),
-        (
-            <Question2 />
-        ),
-        (
-            <div className={unitRedesignStyles['page-8']}>
-                <div>
-                    <h1>Measure of gas and electricity units</h1>
-                    <p>
-                        <b>Electrictity</b> meters record energy consumed in kilowatt hours while <b>gas</b> meters
-                        record the volume of the gas consumed in cubic feet in the case of older meters or cubic meters
-                        for newer models.
-                    </p>
-                    <p>
-                        The calculations used to generate gas bills are prescribed in <b><i>The Gas (Calculation of Thermal Energy)
-                        Regulations (SI 1996/439).</i></b> The Office of Gas and Electricity Markets it the energy regulator and has
-                        responsibility for these refulations. Under this governence suppliers bill customers in kilowatt hours for both
-                        gas and electricity.
-                    </p>
-                    <p>To convert the gas units from cubic meters to kilowatt hours we use this formula : </p>
-                    <b>
-                        <ul>
-                            <li>Units Consumed (cubic meters)</li>
-                            <li>x Volume Conversion Factor (1.0 for cubic meters)</li>
-                            <li>x Volume Correction (1.02264 to account for temperature and pressure)</li>
-                            <li>x Calorific Value (39.5 Joules per m³)</li>
-                            <li>÷ 3600 (3600 seconds in each hour)</li>
-                            <li>x 1000 (Number of Joules in a kilowatt hour)</li>
-                            <li>= Number of kilowatt hours</li>
-                        </ul>
-                    </b>
-                </div>
-                <img src="src\assets\images\Picture2.png" alt="" />
-            </div>
-        ),
-        (
-            <Question3 />
-        ),
-        (
-            <Question4 />
-        ),
-        (
-            <Question5 />
-        ),
-        (
-            <div className={unitRedesignStyles['page-12']}>
-                <h1>How electricity usage is calculated</h1>
-                <p>
-                    Electricity usage is calculated from either <b>actual</b> meter readings
-                    or <b>estimated</b> meter readings. Here is an example of some readings below : 
-                </p>
-                <table>
-                    <tr>
-                        <th>Date</th>
-                        <th>Meter Readings</th>
-                    </tr>
-                    <tr>
-                        <td>2023-09-01</td>
-                        <td>1250.4 kWh</td>
-                    </tr>
-                    <tr>
-                        <td>2023-10-01</td>
-                        <td>1571.2 kWh</td>
-                    </tr>
-                    <tr>
-                        <td>2023-11-01</td>
-                        <td>1698.7 kWh</td>
-                    </tr>
-                    <tr>
-                        <td>2023-12-01</td>
-                        <td>2044.3 kWh</td>
-                    </tr>
-                </table>
-                <p>
-                    To find the customer's monthly consumption, simply subtract the previous month's
-                    reading from this month's. So in this case for the month of November : <br /><br /><b>2044.3 - 1698.7 = 345.6kWh</b>
-                </p>
-            </div>            
-        ),
-        (
-            <div className={unitRedesignStyles['page-13']}>
-                <h1>How gas usage is calculated</h1>
-                <p>
-                    Gas usage is calculated from either <b>actual</b> meter readings
-                    or <b>estimated</b> meter readings and requires a conversion from m³ or ft³ into kWh. 
-                    Here is an example of some readings below : 
-                </p>
-                <table>
-                    <tr>
-                        <th>Date</th>
-                        <th>Meter Readings</th>
-                    </tr>
-                    <tr>
-                        <td>2022-01-01</td>
-                        <td>5637.4m³</td>
-                    </tr>
-                    <tr>
-                        <td>2022-02-01</td>
-                        <td>5984.6m³</td>
-                    </tr>
-                    <tr>
-                        <td>2023-03-01</td>
-                        <td>6389.1m³</td>
-                    </tr>
-                </table>
-                <p>
-                    Again, to find the customer's monthly consumption, simply subtract the previous month's
-                    reading from this month's. So in this case for the month of February : <br /><br /><b>6389.1 - 5984.6 = 404.5m³</b>
-                </p>
-                <p>
-                    Then, we need to convert this from cubic meters into kilowatt hours : <br /><br />
-                    <b>
-                        Units Consumed (404.5m³) <br /> 
-                        x Volume Conversion Factor (1.0) <br />
-                        x Volume Correction (1.02264) <br />
-                        x Calorific Value (39.5m³) <br />
-                        ÷ Joules Conversion (3.6) <br />
-                        = Total Usage In kWh (4538.75) <br />
-                    </b>
-                </p>
-            </div>            
-        ),
-        (
-            <div className={unitRedesignStyles['page-14']}>
-                <h1>Estimated Meter Reads</h1>
-                <p>
-                    <b>How is an estimated meter reading calculated?</b>
-                    <br />
-                    The estimated meter reading is derived from a customer's
-                    estimated annual consumption <b>(EAC)</b> and gas estimated
-                    annual quantity <b>(AQ)</b>.
-                </p>
-                <p>
-                    <b>The estimated annual consumption</b> is calculated by taking all
-                    meter readings that will have been provided by the property over a
-                    period of one year or more and the average usage per month is calculated
-                    using this figure. The estimate for each meter is managed within a centralised
-                    industry database.  
-                </p>
-                <p>
-                    <i><b>Remember that the estimated readings can vary slightly from actual usage.</b></i>
-                </p>
-                <p>
-                    Estimated annual consumption (EAC) helps an energy provider to predict how much a customer
-                    should be paying each month by direct debit, accounting for advance payment and building
-                    credit during the summer to compensate for higher bills during winter.
-                </p>
-                <p>
-                    Accoring to The Office of Gas and Electricity Markets, the 'Average' home in the UK
-                    uses <b>3100kWh of electricity</b> and <b>12,000kWh of gas</b> per year. 
-                </p>
-            </div>
-        ),
-        (
-            <Question6 />
-        ),
-        (
-            <Question7 />
-        ),
-        (
-            <Question8 />
         )
     ];
 
@@ -672,7 +383,7 @@ export default function UnitRedesign() {
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur rhoncus nibh magna, eu semper erat hendrerit at. Vivamus eget dignissim diam, at suscipit nisl. Praesent egestas ullamcorper lobortis. Praesent eu porttitor mauris, ut semper nulla. Duis vel malesuada augue. Phasellus leo justo, tristique quis massa congue, congue semper nisl. Aenean posuere eros a nulla malesuada, a laoreet leo porta. Integer sed est orci. Morbi aliquam accumsan tempor. Nam facilisis tortor nibh, non ullamcorper leo sollicitudin et. Sed ut cursus velit. Aenean tempor felis tellus, ac porttitor sem molestie vitae. Duis sit amet rhoncus augue, sed condimentum justo. Donec eget venenatis lectus, id maximus nisl. Vivamus rutrum nulla eget ex commodo ullamcorper. Quisque maximus nulla nec neque tincidunt, accumsan sagittis dui ultricies.</p>
         ),
         (
-            <textarea name="" id="" cols="150" rows="10"></textarea>
+            <textarea name="" id="" cols="150" rows="5"></textarea>
         )
     ]
 
@@ -686,81 +397,188 @@ export default function UnitRedesign() {
         setPageNumber(pageNumber + 1);
     };
 
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(false); 
+    const [username, setUsername] = useState('');
+ 
+    // Fetch username
+    useEffect(() => {
+        async function fetchUsername() {
+          try {
+            const response = await axios.get('/check-username');
+            setUsername(response.data.username);
+          } catch (error) {
+            console.error('Error fetching session status', error);
+          }
+        }
+        fetchUsername();
+    });
+
+    // Update the user's logged in status when loading the application
+    useEffect(() => {
+        async function fetchLoginStatus() {
+          try {
+            const response = await axios.get('/check-auth');
+            setIsLoggedIn(response.data.isLoggedIn)
+          } catch (error) {
+            console.error('Error fetching session status', error);
+          }
+        }
+        fetchLoginStatus();
+    });
+
+    // Update the user's admin status when loading the application
+    useEffect(() => {
+        async function fetchAdminStatus() {
+            try {
+                const response = await axios.get('/check-admin');
+                setIsAdmin(response.data.isAdmin);
+            } catch (error) {
+                console.error('Error fetching admin status:', error);
+            }
+        }
+        fetchAdminStatus();
+    })
+
+        // Logout function
+        const logout = async () => {
+            try {
+                await axios.post('/logout');
+                setIsLoggedIn(false);
+            } catch(error) {
+                console.error('Error during logout:', error);
+            }    
+        }
+
     return (
         <div className={unitRedesignStyles['unit-container']}>
-            <div className={unitRedesignStyles['unit-header']}>Outfox The Market Training Portal</div>
+            <div className={unitRedesignStyles['unit-header']}>
+                <Link to="/dashboard">Dashboard</Link>
+                {isAdmin && <Link to="/admin">Admin</Link>}
+                <Link to="/login" onClick={logout}>Logout</Link>
+                <Link to="#">{username}</Link>
+            </div>
             <div className={unitRedesignStyles['unit-main']}>
                 <div className={unitRedesignStyles['unit-main-column-1']}>
-                    <div className={unitRedesignStyles['unit-main-page-container']}>
+                    <ProgressBar pageNumber={pageNumber} pages={pages}/>
+                    <div className={`${
+                        dashboardStatus === 'open'
+                        ? unitRedesignStyles['unit-main-page-container']
+                        : unitRedesignStyles['unit-main-page-container-full-height'] 
+                    }`}>
                         {pages[pageNumber]}
                         {pageNumber > 0 && (
                             <button 
                                 className={unitRedesignStyles['unit-main-page-left-button']}
                                 onClick={prevPage}    
-                            >&#60;</button>
+                            ><i class="fa-solid fa-arrow-left"></i></button>
                         )}
                         {pageNumber < (pages.length - 1) && (
                             <button 
                                 className={unitRedesignStyles['unit-main-page-right-button']}
-                                onClick={nextPage}
-                            >&#62;</button>
+                                onClick={() => {
+                                    handlePageCompletion(pageNumber);
+                                    nextPage();
+                                }}
+                            ><i class="fa-solid fa-arrow-right"></i></button>
+                        )}
+                        {sidebarStatus === "closed" &&(
+                            <button
+                                className={unitRedesignStyles['expand-sidebar-button']}
+                                onClick={() => setSidebarStatus('open')}
+                            >
+                                <i class="fa-solid fa-angle-left"></i>
+                            </button>
+                        )}
+                        {dashboardStatus === "closed" &&(
+                            <button
+                                className={unitRedesignStyles['expand-dashboard-button']}
+                                onClick={() => setDashboardStatus('open')}
+                            >
+                                <i class="fa-solid fa-angle-right"></i>
+                            </button>
                         )}
                     </div>
-                    <div className={unitRedesignStyles['unit-main-column-1-dashboard']}>
-                        <div className={unitRedesignStyles['unit-main-column-1-dashboard-header']}>
-                            <h3>Overview</h3>
-                            <h3>Notes</h3>
-                            <h3>Learning Tools</h3>
+                    {dashboardStatus === 'open' && (
+                        <div className={unitRedesignStyles['unit-main-column-1-dashboard']}>
+                            <div className={unitRedesignStyles['unit-main-column-1-dashboard-header']}>
+                                <h3
+                                    className={dashboardPageNumber === 0 && unitRedesignStyles['selected']}
+                                    onClick={() => setDashboardPageNumber(0)}
+                                >
+                                    Overview
+                                </h3>
+                                <h3
+                                    className={dashboardPageNumber === 1 && unitRedesignStyles['selected']}
+                                    onClick={() => setDashboardPageNumber(1)}
+                                >
+                                    Notes
+                                </h3>
+                                <h3
+                                    className={dashboardPageNumber === 2 && unitRedesignStyles['selected']}
+                                    onClick={() => setDashboardPageNumber(2)}
+                                >
+                                    Learning Tools
+                                </h3>
+                                <h3
+                                    className={dashboardPageNumber === 3 && unitRedesignStyles['selected']}
+                                    onClick={() => setDashboardStatus('closed')}
+                                >
+                                    Close
+                                </h3>
+                            </div>
+                            <div className={unitRedesignStyles['unit-main-column-1-dashboard-content']}>
+                                {dashboardPages[dashboardPageNumber]}
+                            </div>
                         </div>
-                        <div className={unitRedesignStyles['unit-main-column-1-dashboard-content']}>
-                            {dashboardPages[dashboardPageNumber]}
-                        </div>
+                    )}
                     </div>
-                </div>
-                <div className={unitRedesignStyles['unit-main-column-2']}>
-                    <div className={unitRedesignStyles['unit-main-column-2-header']}>
-                        <h2>Course Content</h2>
-                        <h3>&#215;</h3>
-                    </div>
-                    <div className={unitRedesignStyles['unit-main-column-2-content']}>
-                        <div className={unitRedesignStyles['unit-main-section']}>
-                            <h3>Section 1 : Intro</h3>
-                            <h5>21 min</h5>
+                    {sidebarStatus === 'open' && (
+                        <div className={unitRedesignStyles['unit-main-column-2']}>
+                            <div className={unitRedesignStyles['unit-main-column-2-header']}>
+                                <h2>Course Content</h2>
+                                <h3 onClick={() => setSidebarStatus('closed')}><i class="fa-solid fa-delete-left"></i></h3>
+                            </div>
+                            <div className={unitRedesignStyles['unit-main-column-2-content']}>
+                                <div className={unitRedesignStyles['unit-main-section']}>
+                                    <h3>Section 1 : Intro</h3>
+                                    <h5>21 min</h5>
+                                </div>
+                                <div className={unitRedesignStyles['unit-main-section']}>
+                                    <h3>Section 2 : The Energy Industry</h3>
+                                    <h5>24 min</h5>
+                                </div>
+                                <div className={unitRedesignStyles['unit-main-section-selected']}>
+                                    <h3>Section 3 : Energy Bills</h3>
+                                    <h5>17 min</h5>
+                                </div>
+                                <div className={unitRedesignStyles['unit-main-section']}>
+                                    <h3>Section 4 : Energy Price Gaurantee</h3>
+                                    <h5>11 min</h5>
+                                </div>
+                                <div className={unitRedesignStyles['unit-main-section']}>
+                                    <h3>Section 5 : Metering</h3>
+                                    <h5>38 min</h5>
+                                </div>
+                                <div className={unitRedesignStyles['unit-main-section']}>
+                                    <h3>Section 6 : Customer Vulnerabilities</h3>
+                                    <h5>15 min</h5>
+                                </div>
+                                <div className={unitRedesignStyles['unit-main-section']}>
+                                    <h3>Section 7 : Debt And Payment Plans</h3>
+                                    <h5>11 min</h5>
+                                </div>
+                                <div className={unitRedesignStyles['unit-main-section']}>
+                                    <h3>Section 8 : Fuel Direct</h3>
+                                    <h5>27 min</h5>
+                                </div>
+                                <div className={unitRedesignStyles['unit-main-section']}>
+                                    <h3>Section 9 : Complaints</h3>
+                                    <h5>25 min</h5>
+                                </div>
+                            </div>
                         </div>
-                        <div className={unitRedesignStyles['unit-main-section']}>
-                            <h3>Section 2 : The Energy Industry</h3>
-                            <h5>24 min</h5>
-                        </div>
-                        <div className={unitRedesignStyles['unit-main-section-selected']}>
-                            <h3>Section 3 : Energy Bills</h3>
-                            <h5>17 min</h5>
-                        </div>
-                        <div className={unitRedesignStyles['unit-main-section']}>
-                            <h3>Section 4 : Energy Price Gaurantee</h3>
-                            <h5>11 min</h5>
-                        </div>
-                        <div className={unitRedesignStyles['unit-main-section']}>
-                            <h3>Section 5 : Metering</h3>
-                            <h5>38 min</h5>
-                        </div>
-                        <div className={unitRedesignStyles['unit-main-section']}>
-                            <h3>Section 6 : Customer Vulnerabilities</h3>
-                            <h5>15 min</h5>
-                        </div>
-                        <div className={unitRedesignStyles['unit-main-section']}>
-                            <h3>Section 7 : Debt And Payment Plans</h3>
-                            <h5>11 min</h5>
-                        </div>
-                        <div className={unitRedesignStyles['unit-main-section']}>
-                            <h3>Section 8 : Fuel Direct</h3>
-                            <h5>27 min</h5>
-                        </div>
-                        <div className={unitRedesignStyles['unit-main-section']}>
-                            <h3>Section 9 : Complaints</h3>
-                            <h5>25 min</h5>
-                        </div>
-                    </div>
-                </div>
+                    )}
             </div>
         </div>
     )
