@@ -11,7 +11,7 @@ import AdminRequired from './components/AdminRequired.jsx'
 import ResetPassword from './pages/ResetPassword.jsx'
 import Admin from './pages/Admin.jsx'
 import Profile from './pages/Profile.jsx'
-import UnitRedesign from './pages/UnitRedesign2.jsx'
+import UnitRedesign from './pages/UnitRedesign.jsx'
 import axios from 'axios';
 import './index.css'
 import MenuRedesign from './pages/MenuRedesign.jsx'
